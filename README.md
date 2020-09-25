@@ -10,6 +10,8 @@
 
 Домен - [https://news-app.ga](https://news-app.ga)
 
+GitHub Pages - [https://evgenii-code.github.io/news-explorer-frontend/](https://evgenii-code.github.io/news-explorer-frontend/)
+
 ## **Стэк технологий** 
 - [Webpack](https://webpack.js.org/)
 - []()
