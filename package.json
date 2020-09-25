@@ -1,0 +1,29 @@
+{
+  "name": "news-explorer-frontend",
+  "version": "0.0.1",
+  "description": "Frontend for diploma",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evgenii-code/news-explorer-frontend.git"
+  },
+  "keywords": [
+    "frontend",
+    "js",
+    "ООП"
+  ],
+  "author": "Osipenkov Evgenii <osipenkov.evgenii@gmail.com> (https://github.com/evgenii-code)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evgenii-code/news-explorer-frontend/issues"
+  },
+  "homepage": "https://github.com/evgenii-code/news-explorer-frontend#readme",
+  "devDependencies": {
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  }
+}
