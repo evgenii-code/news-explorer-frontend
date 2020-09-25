@@ -17,8 +17,28 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/, // применять это правило только к CSS-файлам
+        test: /\.css$/i, // применять это правило только к CSS-файлам
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'], // к этим файлам нужно применить пакеты, которые мы уже установили
+      },
+      {
+        test: /\.(eot|ttf|woff|woff2)$/,
+        loader: 'file-loader?name=./vendor/[name].[ext]',
+      },
+      {
+        test: /\.(png|jpg|gif|ico|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: './images/[name].[ext]',
+              esModule: false,
+            },
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {},
+          },
+        ],
       },
     ],
   },
