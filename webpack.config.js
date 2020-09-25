@@ -18,7 +18,7 @@ module.exports = {
       },
       {
         test: /\.css$/, // применять это правило только к CSS-файлам
-        use: [MiniCssExtractPlugin.loader, 'css-loader'], // к этим файлам нужно применить пакеты, которые мы уже установили
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'], // к этим файлам нужно применить пакеты, которые мы уже установили
       },
     ],
   },
