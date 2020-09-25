@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
+const webpack = require('webpack');
 
 module.exports = {
   entry: { main: './src/index.js' },
@@ -46,12 +47,18 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'style.[contenthash].css',
     }),
+
     new HtmlWebpackPlugin({
       // Означает, что:
       inject: false, // стили НЕ нужно прописывать внутри тегов
       template: './src/index.html', // откуда брать образец для сравнения с текущим видом проекта
       filename: 'index.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
     }),
+
     new WebpackMd5Hash(),
+
+    new webpack.DefinePlugin({
+      'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
   ],
 };
