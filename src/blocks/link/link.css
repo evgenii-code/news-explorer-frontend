@@ -1,0 +1,7 @@
+@import url('./_theme/link_theme_dark.css');
+@import url('./_theme/link_theme_light.css');
+
+.link {
+  color: inherit;
+  text-decoration: none;
+}
