@@ -11,7 +11,46 @@
         href="<%=require('./assets/ui/icons/favicon.svg')%>">
   <title>NewsExplorer</title>
 </head>
-<body>
+<body class="body font font_family_roboto">
+  <header class="header font font_color_light">
+    <div class="header__container container">
+      <h1 class="header__logo font font_family_roboto-slab">NewsExplorer</h1>
+
+      <nav class="header__menu menu">
+        <ul class="menu__list">
+          <li class="menu__item">
+            <a href="" class="menu__link menu__link_active link link_theme_light">Главная</a>
+          </li>
+          <li class="menu__item">
+            <button class="menu__button button button_type_light button_type_transparent">Регистрация</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="main__search search font font_color_light">
+      <div class="search__container">
+        <h2 class="search__title font font_family_roboto-slab">Что в мире творится?</h2>
+        <p class="search__description">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
+        <div class="search__field">
+          <input class="search__input" type="text" placeholder="Введите тему новости">
+          <button class="search__button button button_type_colored">Искать</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+
+    </div>
+  </footer>
 
   <script src="<%= htmlWebpackPlugin.files.js %>"></script>
 </body>
