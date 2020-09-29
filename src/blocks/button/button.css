@@ -1,0 +1,15 @@
+@import url('./_type/button_type_dark.css');
+@import url('./_type/button_type_light.css');
+@import url('./_type/button_type_transparent.css');
+@import url('./_type/button_type_colored.css');
+
+.button {
+  border-radius: 100px;
+  border-width: 1px;
+  border-style: solid;
+
+  cursor: pointer;
+
+  color: inherit;
+  font-weight: inherit;
+}
