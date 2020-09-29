@@ -1,0 +1,18 @@
+.menu__button {
+  min-height: 48px;
+  min-width: 176px;
+  align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+  .menu__button {
+    min-height: 40px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .menu__button {
+    width: 100%;
+    min-height: 56px;
+  }
+}

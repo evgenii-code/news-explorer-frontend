@@ -1,0 +1,20 @@
+.menu__item {
+  display: flex;
+  margin-left: 32px;
+}
+
+.menu__item:first-of-type {
+  margin-left: 0;
+}
+
+@media screen and (max-width: 540px) {
+  .menu__item {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 22px;
+  }
+
+  .menu__item:first-of-type {
+    margin-top: 0;
+  }
+}

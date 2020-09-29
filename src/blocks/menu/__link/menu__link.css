@@ -1,0 +1,6 @@
+@import url('./_active/menu__link_active.css');
+
+.menu__link {
+  display: flex;
+  align-items: center;
+}

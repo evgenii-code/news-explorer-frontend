@@ -1,0 +1,23 @@
+@import url('./__list/menu__list.css');
+@import url('./__item/menu__item.css');
+@import url('./__link/menu__link.css');
+@import url('./__button/menu__button.css');
+
+.menu {
+  display: flex;
+  align-items: stretch;
+}
+
+
+@media screen and (max-width: 540px) {
+  .menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background-color: #1A1B22;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+}
