@@ -1,0 +1,17 @@
+.menu__checkbox {
+  display: none;
+}
+
+@media screen and (max-width: 540px) {
+  .menu__checkbox {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+  }
+}

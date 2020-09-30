@@ -11,3 +11,9 @@
   height: 3px;
   background-color: #fff;
 }
+
+@media screen and (max-width: 540px) {
+  .menu__link_active:after {
+    content: unset;
+  }
+}

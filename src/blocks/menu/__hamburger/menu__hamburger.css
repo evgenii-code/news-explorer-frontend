@@ -1,0 +1,21 @@
+.menu__hamburger {
+  display: none;
+}
+
+@media screen and (max-width: 540px) {
+  .menu__hamburger {
+    display: inline-block;
+    background-image: url('../../../assets/ui/icons/hamburger.svg');
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    z-index: 1;
+  }
+
+  .menu__checkbox:checked ~ .menu__hamburger {
+    background-image: url('../../../assets/ui/icons/close.svg');
+  }
+}

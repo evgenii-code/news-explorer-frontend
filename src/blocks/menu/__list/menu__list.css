@@ -7,7 +7,22 @@
 
 @media screen and (max-width: 540px) {
   .menu__list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     flex-direction: column;
-    width: 100%;
+    padding: 16px;
+
+    background-color: #1A1B22;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+
+    transform: translateY(-200%);
+    transition: transform .4s ease;
+  }
+
+  .menu__checkbox:checked ~ .menu__list {
+    transform: translateY(0);
   }
 }
