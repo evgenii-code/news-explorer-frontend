@@ -14,12 +14,6 @@
 
 @media screen and (max-width: 540px) {
   .search__container {
-    padding: 0 40px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .search__container {
     padding: 0 16px;
   }
 }

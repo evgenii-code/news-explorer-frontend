@@ -1,0 +1,10 @@
+.author__container {
+  display: flex;
+}
+
+@media screen and (max-width: 540px) {
+  .author__container {
+    flex-direction: column;
+    align-items: center;
+  }
+}

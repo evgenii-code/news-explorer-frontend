@@ -1,0 +1,9 @@
+.author__about {
+  margin-left: 56px;
+}
+
+@media screen and (max-width: 540px) {
+  .author__about {
+    margin-left: 0;
+  }
+}
