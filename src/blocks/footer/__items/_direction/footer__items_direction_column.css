@@ -1,0 +1,9 @@
+.footer__items_direction_column {
+  flex-direction: row;
+}
+
+@media screen and (max-width: 320px) {
+  .footer__items_direction_column {
+    flex-direction: column;
+  }
+}

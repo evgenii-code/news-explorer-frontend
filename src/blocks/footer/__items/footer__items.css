@@ -1,0 +1,19 @@
+@import url('./_direction/footer__items_direction_column.css');
+
+.footer__items {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__items:first-of-type {
+  margin-left: auto;
+  margin-right: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .footer__items:first-of-type {
+    margin-right: 25px;
+  }
+}
