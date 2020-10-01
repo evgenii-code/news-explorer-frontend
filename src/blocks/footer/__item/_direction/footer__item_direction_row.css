@@ -1,0 +1,8 @@
+.footer__item_direction_row {
+  margin: 0;
+  margin-left: 28px;
+}
+
+.footer__item_direction_row:first-of-type {
+  margin-left: 0;
+}

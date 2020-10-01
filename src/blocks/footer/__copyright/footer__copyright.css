@@ -5,4 +5,12 @@
   line-height: 22px;
 
   color: #B6BCBF;
+
+  grid-area: copyright;
+}
+
+@media screen and (max-width: 540px) {
+  .footer__copyright {
+    margin-top: 38px;
+  }
 }

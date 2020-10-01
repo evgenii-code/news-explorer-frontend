@@ -1,8 +1,6 @@
-.footer__item {
-  margin: 0;
-  margin-left: 28px;
-}
+@import url('./_direction/footer__item_direction_column.css');
+@import url('./_direction/footer__item_direction_row.css');
 
-.footer__item:first-of-type {
-  margin-left: 0;
+.footer__item {
+
 }

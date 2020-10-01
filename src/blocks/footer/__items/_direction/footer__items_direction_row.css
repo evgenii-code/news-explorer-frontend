@@ -1,0 +1,12 @@
+.footer__items_direction_row {
+  margin: 0;
+
+  grid-area: social-media;
+}
+
+@media screen and (max-width: 540px) {
+  .footer__items_direction_row {
+    margin-top: 0;
+    margin-left: auto;
+  }
+}

@@ -5,3 +5,17 @@
   margin: 0 auto;
   width: 100%;
 }
+
+@media screen and (max-width: 540px) {
+  .footer__container {
+    display: grid;
+    grid-template-columns: minmax(auto, 200px) 1fr;
+    grid-template-areas:
+    'links social-media'
+    'copyright copyright';
+    align-items: start;
+
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+}
