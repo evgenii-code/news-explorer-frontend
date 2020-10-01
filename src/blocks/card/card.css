@@ -1,0 +1,29 @@
+@import url('./__address/card__address.css');
+@import url('./__container/card__container.css');
+@import url('./__date/card__date.css');
+@import url('./__description/card__description.css');
+@import url('./__image/card__image.css');
+@import url('./__title/card__title.css');
+
+.card {
+  background-color: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+
+  max-width: 400px;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 47.2% 1fr;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    grid-template-rows: 35.7% 1fr;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .card {
+    grid-template-rows: 44.5% 1fr;
+  }
+}

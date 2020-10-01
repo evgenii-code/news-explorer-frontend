@@ -2,6 +2,7 @@
 @import url('./__results/cards__results.css');
 @import url('./__container/cards__container.css');
 @import url('./__title/cards__title.css');
+@import url('./__card/cards__card.css');
 
 .cards {
   background-color: #F5F6F7;
