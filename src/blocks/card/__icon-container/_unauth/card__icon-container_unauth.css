@@ -1,0 +1,22 @@
+.card__icon-container_unauth:before {
+  content: 'Войдите, чтобы сохранять статьи';
+  position: absolute;
+  top: 0;
+  right: 45px;
+  min-height: 40px;
+  white-space: nowrap;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.card__icon-container_unauth:hover:before {
+  opacity: 1;
+}

@@ -1,0 +1,12 @@
+@import url('./_type/card__icon_type_delete.css');
+@import url('./_type/card__icon_type_unmarked.css');
+@import url('./_type/card__icon_type_marked.css');
+
+.card__icon {
+  position: relative;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  transition: background-color .2s ease;
+}

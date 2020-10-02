@@ -4,8 +4,13 @@
 @import url('./__description/card__description.css');
 @import url('./__image/card__image.css');
 @import url('./__title/card__title.css');
+@import url('./__icon-container/card__icon-container.css');
+@import url('./__icon/card__icon.css');
+@import url('./__keyword/card__keyword.css');
 
 .card {
+  position: relative;
+
   background-color: #fff;
   border-radius: 16px;
   overflow: hidden;
