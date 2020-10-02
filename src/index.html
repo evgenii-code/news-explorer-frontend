@@ -12,7 +12,7 @@
   <title>NewsExplorer</title>
 </head>
 <body class="body font font_family_roboto">
-  <header class="header font font_color_light">
+  <header class="header header_position_overlaid header_theme_light font font_color_light">
     <div class="header__container container">
       <h1 class="header__logo font font_family_roboto-slab">NewsExplorer</h1>
 
@@ -23,10 +23,13 @@
 
         <ul class="menu__list">
           <li class="menu__item">
-            <a href="" class="menu__link menu__link_active link link_theme_light">Главная</a>
+            <a href="/" class="menu__link menu__link_active link link_theme_light">Главная</a>
           </li>
           <li class="menu__item">
-            <button class="menu__button button button_type_light button_type_transparent">Регистрация</button>
+            <a href="/bookmarks.html" class="menu__link link link_theme_light">Сохранённые статьи</a>
+          </li>
+          <li class="menu__item">
+            <button class="menu__button button button_type_light button_type_transparent button_logout_light">Грета</button>
           </li>
         </ul>
       </nav>
@@ -51,8 +54,6 @@
 
         <div class="cards__results">
           <article class="cards__card card">
-            <p class="card__keyword">Природа</p>
-
             <div class="card__icon-container card__icon-container_unauth">
               <div class="card__icon card__icon_type_unmarked"></div>
             </div>
@@ -73,8 +74,6 @@
           </article>
 
           <article class="cards__card card">
-            <p class="card__keyword card__keyword_auth">Природа</p>
-
             <div class="card__icon-container">
               <div class="card__icon card__icon_type_marked"></div>
             </div>
@@ -95,8 +94,6 @@
           </article>
 
           <article class="cards__card card">
-            <p class="card__keyword">Природа</p>
-
             <div class="card__icon-container card__icon-container_unauth">
               <div class="card__icon card__icon_type_unmarked "></div>
             </div>

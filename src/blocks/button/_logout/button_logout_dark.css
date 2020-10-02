@@ -1,0 +1,4 @@
+.button_logout_dark::after {
+  content: '';
+  background-image: url('../../../assets/ui/icons/logout-black.svg');
+}
