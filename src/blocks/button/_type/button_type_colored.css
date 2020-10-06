@@ -1,4 +1,15 @@
 .button_type_colored {
   background-color: #2F71E5;
   border-color: #2F71E5;
+  transition: background-color .1s ease, border-color .1s ease;
+}
+
+.button_type_colored:hover {
+  background-color: #347EFF;
+  border-color: #347EFF;
+}
+
+.button_type_colored:active{
+  background-color: #2A65CC;
+  border-color: #2A65CC;
 }

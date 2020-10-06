@@ -1,4 +1,10 @@
 .button_type_light {
   border-color: #fff;
   background-color: #fff;
+  transition: opacity .1s ease;
 }
+
+.button_type_light:hover {
+  opacity: .9;
+}
+

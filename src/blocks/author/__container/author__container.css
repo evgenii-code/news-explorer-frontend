@@ -1,9 +1,12 @@
 .author__container {
-  display: flex;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 37.662% 1fr;
 }
 
 @media screen and (max-width: 540px) {
   .author__container {
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
