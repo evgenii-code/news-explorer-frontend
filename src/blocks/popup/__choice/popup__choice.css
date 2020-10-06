@@ -1,0 +1,10 @@
+@import url('./_display/popup__choice_display_block.css');
+@import url('./_display/popup__choice_display_inline.css');
+
+.popup__choice {
+  color: #3071E5;
+  cursor: pointer;
+  border: none;
+  background-color: unset;
+  padding: 0;
+}

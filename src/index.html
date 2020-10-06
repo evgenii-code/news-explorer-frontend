@@ -12,6 +12,115 @@
   <title>NewsExplorer</title>
 </head>
 <body class="body font font_family_roboto">
+  <!-- Попап "Вход" -->
+  <!-- <template> -->
+    <div class="body__popup popup">
+      <div class="popup__content">
+        <img src="<%=require('./assets/ui/icons/close.svg')%>" alt="Закрыть попап" class="popup__close">
+
+        <h3 class="popup__title">Вход</h3>
+
+        <form class="popup__form font font_family_inter" name="signin">
+          <label class="popup__label">Email
+            <input
+                  type="email"
+                  name="email"
+                  class="popup__input popup__input_type_email"
+                  placeholder="Введите почту"
+                  minlength="2"
+                  maxlength="30"
+                  required>
+            <p class="popup__error" aria-live="polite">Неправильный формат email</p>
+          </label>
+
+          <label class="popup__label">Пароль
+            <input
+                  type="password"
+                  name="password"
+                  class="popup__input popup__input_type_password"
+                  placeholder="Введите пароль"
+                  minlength="8"
+                  required>
+            <p class="popup__error" aria-live="polite"></p>
+          </label>
+
+          <p class="popup__error popup__error_align_center" aria-live="polite"></p>
+
+          <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
+        </form>
+
+        <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Зарегистрироваться</button></p>
+      </div>
+    </div>
+  <!-- </template> -->
+
+  <!-- Попап "Регистрация" -->
+  <!-- <template> -->
+    <div class="body__popup popup popup_is-opened">
+      <div class="popup__content">
+        <img src="<%=require('./assets/ui/icons/close.svg')%>" alt="Закрыть попап" class="popup__close">
+
+        <h3 class="popup__title">Регистрация</h3>
+
+        <form class="popup__form font font_family_inter" name="signup">
+          <label class="popup__label">Email
+            <input
+                  type="email"
+                  name="email"
+                  class="popup__input popup__input_type_email"
+                  placeholder="Введите почту"
+                  minlength="2"
+                  maxlength="30"
+                  required>
+            <p class="popup__error" aria-live="polite">Неправильный формат email</p>
+          </label>
+
+          <label class="popup__label">Пароль
+            <input
+                  type="password"
+                  name="password"
+                  class="popup__input popup__input_type_password"
+                  placeholder="Введите пароль"
+                  minlength="8"
+                  required>
+            <p class="popup__error" aria-live="polite"></p>
+          </label>
+
+          <label class="popup__label">Имя
+            <input
+                  type="text"
+                  name="name"
+                  class="popup__input popup__input_type_name"
+                  placeholder="Введите свое имя"
+                  minlength="2"
+                  maxlength="30"
+                  required>
+            <p class="popup__error" aria-live="polite"></p>
+          </label>
+
+          <p class="popup__error popup__error_align_center" aria-live="polite">Такой пользователь уже существует</p>
+
+          <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
+        </form>
+
+        <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Войти</button></p>
+      </div>
+    </div>
+  <!-- </template> -->
+
+  <!-- Попап "Успешная регистрация" -->
+  <!-- <template> -->
+    <div class="body__popup popup">
+      <div class="popup__content">
+        <img src="<%=require('./assets/ui/icons/close.svg')%>" alt="Закрыть попап" class="popup__close">
+
+        <h3 class="popup__title">Пользователь успешно зарегистрирован!</h3>
+
+        <button class="popup__choice popup__choice_display_block">Войти</button>
+      </div>
+    </div>
+  <!-- </template> -->
+
   <header class="body__header body__header_position_overlaid header header_theme_light font font_color_light">
     <div class="header__container container">
       <h1 class="header__logo font font_family_roboto-slab">NewsExplorer</h1>

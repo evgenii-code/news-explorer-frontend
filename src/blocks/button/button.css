@@ -20,6 +20,13 @@
   align-items: center;
 }
 
+.button:disabled {
+  cursor: not-allowed;
+  background-color: #E6E8EB;
+  border-color: #E6E8EB;
+  color: #B6BCBF;
+}
+
 .button::after {
   background-repeat: no-repeat;
   background-position: center;
