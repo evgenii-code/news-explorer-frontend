@@ -4,12 +4,19 @@
 @import url('./__button/menu__button.css');
 @import url('./__hamburger/menu__hamburger.css');
 @import url('./__checkbox/menu__checkbox.css');
+@import url('./__logo/menu__logo.css');
 
 .menu {
   display: flex;
   align-items: stretch;
 }
 
+@media screen and (max-width: 720px) {
+  .menu {
+    position: relative;
+    width: 100%;
+  }
+}
 
 @media screen and (max-width: 540px) {
   /* .popup_is-opened ~ .header .header__container .menu {

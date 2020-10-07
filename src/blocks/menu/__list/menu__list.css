@@ -1,3 +1,13 @@
+@keyframes showup {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
 .menu__list {
   list-style: none;
   display: flex;
@@ -7,28 +17,20 @@
 
 @media screen and (max-width: 720px) {
   .menu__list {
+    display: none;
     position: absolute;
-    top: 100%;
+    top: 0;
     left: 0;
     right: 0;
     flex-direction: column;
-    padding: 40px;
 
     background-color: #1A1B22;
     border-bottom-right-radius: 16px;
     border-bottom-left-radius: 16px;
-
-    transform: translateY(-200%);
-    transition: transform .4s ease;
   }
 
   .menu__checkbox:checked ~ .menu__list {
-    transform: translateY(0);
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .menu__list {
-    padding: 16px;
+    display: flex;
+    animation: showup .2s ease;
   }
 }

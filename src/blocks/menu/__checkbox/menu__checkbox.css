@@ -11,7 +11,8 @@
     opacity: 0;
     cursor: pointer;
     position: absolute;
-    right: 16px;
-    top: 16px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
