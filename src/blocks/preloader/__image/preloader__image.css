@@ -1,0 +1,6 @@
+@import url('./_type/preloader__image_type_failed.css');
+@import url('./_type/preloader__image_type_pending.css');
+
+.preloader__image {
+  background-size: contain;
+}

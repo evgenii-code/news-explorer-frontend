@@ -1,0 +1,5 @@
+.preloader__image_type_failed {
+  width: 96px;
+  height: 96px;
+  background-image: url('../../../../assets/ui/icons/not-found_v1.svg');
+}
