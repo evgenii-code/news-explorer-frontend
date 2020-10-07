@@ -20,12 +20,6 @@
   flex-direction: column;
 }
 
-@media screen and (max-width: 768px) {
-  .popup__content {
-    margin-top: 207px;
-  }
-}
-
 @media screen and (max-width: 540px) {
   .popup__content {
     animation: slide .2s ease;

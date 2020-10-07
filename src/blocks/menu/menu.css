@@ -12,7 +12,7 @@
 
 
 @media screen and (max-width: 540px) {
-  .popup_is-opened ~ .header .header__container .menu {
+  /* .popup_is-opened ~ .header .header__container .menu {
     display: none;
-  }
+  } */
 }

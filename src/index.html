@@ -13,156 +13,151 @@
 </head>
 <body class="body font font_family_roboto">
   <!-- Попап "Вход" -->
-  <!-- <template> -->
-    <div class="body__popup popup">
-      <div class="popup__content">
-        <img src="<%=require('./assets/ui/icons/close.svg')%>" alt="Закрыть попап" class="popup__close">
+  <div class="body__popup popup">
+    <div class="popup__content">
+      <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
 
-        <h3 class="popup__title">Вход</h3>
+      <h3 class="popup__title">Вход</h3>
 
-        <form class="popup__form font font_family_inter" name="signin">
-          <label class="popup__label">Email
-            <input
-                  type="email"
-                  name="email"
-                  class="popup__input popup__input_type_email"
-                  placeholder="Введите почту"
-                  minlength="2"
-                  maxlength="30"
-                  required>
-            <p class="popup__error" aria-live="polite">Неправильный формат email</p>
-          </label>
+      <form class="popup__form font font_family_inter" name="signin">
+        <label class="popup__label">Email
+          <input
+                type="email"
+                name="email"
+                class="popup__input popup__input_type_email"
+                placeholder="Введите почту"
+                minlength="2"
+                maxlength="30"
+                required>
+          <p class="popup__error" aria-live="polite">Неправильный формат email</p>
+        </label>
 
-          <label class="popup__label">Пароль
-            <input
-                  type="password"
-                  name="password"
-                  class="popup__input popup__input_type_password"
-                  placeholder="Введите пароль"
-                  minlength="8"
-                  required>
-            <p class="popup__error" aria-live="polite"></p>
-          </label>
+        <label class="popup__label">Пароль
+          <input
+                type="password"
+                name="password"
+                class="popup__input popup__input_type_password"
+                placeholder="Введите пароль"
+                minlength="8"
+                required>
+          <p class="popup__error" aria-live="polite"></p>
+        </label>
 
-          <p class="popup__error popup__error_align_center" aria-live="polite"></p>
+        <p class="popup__error popup__error_align_center" aria-live="polite"></p>
 
-          <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
-        </form>
+        <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
+      </form>
 
-        <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Зарегистрироваться</button></p>
-      </div>
+      <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Зарегистрироваться</button></p>
     </div>
-  <!-- </template> -->
+  </div>
 
   <!-- Попап "Регистрация" -->
-  <!-- <template> -->
-    <div class="body__popup popup popup_is-opened">
-      <div class="popup__content">
-        <img src="<%=require('./assets/ui/icons/close.svg')%>" alt="Закрыть попап" class="popup__close">
+  <!-- popup_is-opened - класс для открытия попапа -->
+  <div class="body__popup popup">
+    <div class="popup__content">
+      <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
 
-        <h3 class="popup__title">Регистрация</h3>
+      <h3 class="popup__title">Регистрация</h3>
 
-        <form class="popup__form font font_family_inter" name="signup">
-          <label class="popup__label">Email
-            <input
-                  type="email"
-                  name="email"
-                  class="popup__input popup__input_type_email"
-                  placeholder="Введите почту"
-                  minlength="2"
-                  maxlength="30"
-                  required>
-            <p class="popup__error" aria-live="polite">Неправильный формат email</p>
-          </label>
+      <form class="popup__form font font_family_inter" name="signup">
+        <label class="popup__label">Email
+          <input
+                type="email"
+                name="email"
+                class="popup__input popup__input_type_email"
+                placeholder="Введите почту"
+                minlength="2"
+                maxlength="30"
+                required>
+          <p class="popup__error" aria-live="polite">Неправильный формат email</p>
+        </label>
 
-          <label class="popup__label">Пароль
-            <input
-                  type="password"
-                  name="password"
-                  class="popup__input popup__input_type_password"
-                  placeholder="Введите пароль"
-                  minlength="8"
-                  required>
-            <p class="popup__error" aria-live="polite"></p>
-          </label>
+        <label class="popup__label">Пароль
+          <input
+                type="password"
+                name="password"
+                class="popup__input popup__input_type_password"
+                placeholder="Введите пароль"
+                minlength="8"
+                required>
+          <p class="popup__error" aria-live="polite"></p>
+        </label>
 
-          <label class="popup__label">Имя
-            <input
-                  type="text"
-                  name="name"
-                  class="popup__input popup__input_type_name"
-                  placeholder="Введите свое имя"
-                  minlength="2"
-                  maxlength="30"
-                  required>
-            <p class="popup__error" aria-live="polite"></p>
-          </label>
+        <label class="popup__label">Имя
+          <input
+                type="text"
+                name="name"
+                class="popup__input popup__input_type_name"
+                placeholder="Введите свое имя"
+                minlength="2"
+                maxlength="30"
+                required>
+          <p class="popup__error" aria-live="polite"></p>
+        </label>
 
-          <p class="popup__error popup__error_align_center" aria-live="polite">Такой пользователь уже существует</p>
+        <p class="popup__error popup__error_align_center" aria-live="polite">Такой пользователь уже существует</p>
 
-          <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
-        </form>
+        <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
+      </form>
 
-        <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Войти</button></p>
-      </div>
+      <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Войти</button></p>
     </div>
-  <!-- </template> -->
+  </div>
 
   <!-- Попап "Успешная регистрация" -->
-  <!-- <template> -->
-    <div class="body__popup popup">
-      <div class="popup__content">
-        <img src="<%=require('./assets/ui/icons/close.svg')%>" alt="Закрыть попап" class="popup__close">
+  <div class="body__popup popup">
+    <div class="popup__content">
+      <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
 
-        <h3 class="popup__title">Пользователь успешно зарегистрирован!</h3>
+      <h3 class="popup__title">Пользователь успешно зарегистрирован!</h3>
 
-        <button class="popup__choice popup__choice_display_block">Войти</button>
-      </div>
+      <button class="popup__choice popup__choice_display_block">Войти</button>
     </div>
-  <!-- </template> -->
+  </div>
 
-  <header class="body__header body__header_position_overlaid header header_theme_light font font_color_light">
-    <div class="header__container container">
-      <h1 class="header__logo font font_family_roboto-slab">NewsExplorer</h1>
+  <header class="header header_theme_light font font_color_light body__header body__header_position_overlaid">
+    <div class="container header__container">
+      <h1 class="font font_family_roboto-slab header__logo">NewsExplorer</h1>
 
-      <nav class="header__menu menu">
+      <nav class="menu header__menu">
         <input class="menu__checkbox" type="checkbox">
 
-        <div class="menu__hamburger" tabindex="0"></div>
+        <div class="menu__hamburger menu__hamburger_theme_light" tabindex="0"></div>
 
         <ul class="menu__list">
           <li class="menu__item">
-            <a href="/" class="menu__link menu__link_active link link_theme_light">Главная</a>
+            <a href="/" class="link menu__link menu__link_active menu__link_theme_light">Главная</a>
           </li>
           <li class="menu__item">
-            <a href="/bookmarks.html" class="menu__link link link_theme_light">Сохранённые статьи</a>
+            <a href="/bookmarks.html" class="link menu__link menu__link_theme_light">Сохранённые статьи</a>
           </li>
           <li class="menu__item">
-            <button class="menu__button button button_type_light button_type_transparent button_logout_light">Грета</button>
+            <button class="button button_type_light button_type_transparent button_logout_light menu__button">Грета</button>
           </li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main class="body__main main">
-    <section class="main__search search font font_color_light">
+  <main class="main body__main">
+    <section class="font font_color_light search main__search">
       <div class="search__container">
-        <h2 class="search__title font font_family_roboto-slab">Что в мире творится?</h2>
+        <h2 class="font font_family_roboto-slab search__title">Что в мире творится?</h2>
         <p class="search__description">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
         <form class="search__field">
           <input class="search__input" type="text" placeholder="Введите тему новости">
-          <button class="search__button button button_type_colored">Искать</button>
+          <button class="button button_type_colored search__button">Искать</button>
         </form>
       </div>
     </section>
 
-    <section class="main__cards cards font font_color_dark">
-      <div class="cards__container container">
-        <h2 class="cards__title font font_family_roboto-slab">Результаты поиска</h2>
+    <section class="font font_color_dark cards main__cards">
+      <div class="container cards__container">
+        <h2 class="font font_family_roboto-slab cards__title">Результаты поиска</h2>
 
         <div class="cards__results">
-          <article class="cards__card card">
+          <article class="card cards__card">
             <div class="card__icon-container card__icon-container_unauth">
               <div class="card__icon card__icon_type_unmarked"></div>
             </div>
@@ -175,14 +170,14 @@
             </picture>
 
             <div class="card__container">
-              <time class="card__date font font_family_source">2 августа, 2019</time>
-              <h3 class="card__title font font_family_roboto-slab">Национальное достояние – парки</h3>
+              <time class="font font_family_source card__date">2 августа, 2019</time>
+              <h3 class="font font_family_roboto-slab card__title">Национальное достояние – парки</h3>
               <p class="card__description">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.</p>
-              <address class="card__address font font_family_roboto-slab">Лента.ру</address>
+              <address class="font font_family_roboto-slab card__address">Лента.ру</address>
             </div>
           </article>
 
-          <article class="cards__card card">
+          <article class="card cards__card">
             <div class="card__icon-container">
               <div class="card__icon card__icon_type_marked"></div>
             </div>
@@ -195,14 +190,14 @@
             </picture>
 
             <div class="card__container">
-              <time class="card__date font font_family_source">2 августа, 2019</time>
-              <h3 class="card__title font font_family_roboto-slab">Лесные огоньки: история одной фотографии</h3>
+              <time class="font font_family_source card__date ">2 августа, 2019</time>
+              <h3 class="font font_family_roboto-slab card__title">Лесные огоньки: история одной фотографии</h3>
               <p class="card__description">Фотограф отвлеклась от освещения суровой политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного из местных чудес природы.</p>
-              <address class="card__address font font_family_roboto-slab">Афиша</address>
+              <address class="font font_family_roboto-slab card__address">Афиша</address>
             </div>
           </article>
 
-          <article class="cards__card card">
+          <article class="card cards__card">
             <div class="card__icon-container card__icon-container_unauth">
               <div class="card__icon card__icon_type_unmarked "></div>
             </div>
@@ -215,27 +210,27 @@
             </picture>
 
             <div class="card__container">
-              <time class="card__date font font_family_source">2 августа, 2019</time>
-              <h3 class="card__title font font_family_roboto-slab">«Первозданная тайга»: новый фотопроект Игоря Шпиленка</h3>
+              <time class="font font_family_source card__date">2 августа, 2019</time>
+              <h3 class="font font_family_roboto-slab card__title ">«Первозданная тайга»: новый фотопроект Игоря Шпиленка</h3>
               <p class="card__description">Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где...</p>
-              <address class="card__address font font_family_roboto-slab">Медиазона</address>
+              <address class="font font_family_roboto-slab card__address">Медиазона</address>
             </div>
           </article>
         </div>
 
-        <button class="cards__button button button_type_light">Показать еще</button>
+        <button class="button button_type_light cards__button">Показать еще</button>
       </div>
     </section>
 
-    <section class="main__author author">
-      <div class="author__container container">
+    <section class="author main__author">
+      <div class="container author__container">
         <picture>
           <source src="<%=require('./assets/images/author-avatar-small.jpg')%>" media="(min-width: 480px)">
           <img src="<%=require('./assets/images/author-avatar-normal.jpg')%>" alt="Фото автора" class="author__image">
         </picture>
 
         <div class="author__about">
-          <h2 class="author__title font font_family_roboto-slab">Об авторе</h2>
+          <h2 class="font font_family_roboto-slab author__title">Об авторе</h2>
 
           <p class="author__description">Это блок с описанием автора проекта. Здесь следует указать, как вас зовут, чем вы занимаетесь, какими технологиями разработки владеете.</p>
           <p class="author__description">Также можно рассказать о процессе обучения в Практикуме, чему вы тут научились, и чем можете помочь потенциальным заказчикам.</p>
@@ -244,15 +239,15 @@
     </section>
   </main>
 
-  <footer class="body__footer footer">
-    <div class="footer__container container">
+  <footer class="footer body__footer">
+    <div class="container footer__container">
       <small class="footer__copyright">© 2020 Supersite, Powered by News API</small>
 
       <ul class="footer__items footer__items_direction_column">
         <li class="footer__item footer__item_direction_column">
           <a
             href=""
-            class="footer__link link link_theme_dark"
+            class="link footer__link"
           >Главная</a>
         </li>
         <li class="footer__item footer__item_direction_column">
@@ -260,7 +255,7 @@
             href="https://praktikum.yandex.ru"
             rel="noopener noreferrer"
             target="_blank"
-            class="footer__link link link_theme_dark"
+            class="link footer__link"
           >Яндекс.Практикум</a>
         </li>
       </ul>

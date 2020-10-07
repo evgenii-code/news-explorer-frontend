@@ -7,7 +7,7 @@
   margin-left: 0;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 720px) {
   .menu__item {
     width: 100%;
     margin-left: 0;

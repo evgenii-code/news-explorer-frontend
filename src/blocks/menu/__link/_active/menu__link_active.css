@@ -11,7 +11,7 @@
   height: 3px;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 720px) {
   .menu__link_active:after {
     content: unset;
   }

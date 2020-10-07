@@ -1,0 +1,7 @@
+.menu__hamburger_theme_light {
+  background-image: url('../../../../assets/ui/icons/hamburger-light.svg');
+}
+
+.menu__checkbox:checked ~ .menu__hamburger_theme_light {
+  background-image: url('../../../../assets/ui/icons/close-light.svg');
+}

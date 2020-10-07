@@ -5,14 +5,14 @@
   margin: unset;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 720px) {
   .menu__list {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     flex-direction: column;
-    padding: 16px;
+    padding: 40px;
 
     background-color: #1A1B22;
     border-bottom-right-radius: 16px;
@@ -24,5 +24,11 @@
 
   .menu__checkbox:checked ~ .menu__list {
     transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .menu__list {
+    padding: 16px;
   }
 }
