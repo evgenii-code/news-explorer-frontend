@@ -1,6 +1,5 @@
 @import url('./_type/preloader__container_type_failed.css');
 @import url('./_type/preloader__container_type_pending.css');
-@import url('./_showed/preloader__container_showed.css');
 
 .preloader__container {
   margin: 0 auto;
