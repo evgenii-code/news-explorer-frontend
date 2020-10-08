@@ -8,22 +8,16 @@ const cssnano = require('cssnano');
 
 const isDev = process.env.NODE_ENV === 'development';
 
-const htmlPageNames = ['index', 'bookmarks'];
-const multipleHtmlPlugins = htmlPageNames.map((name) => new HtmlWebpackPlugin({
-  inject: false,
-  template: `./src/${name}.html`,
-  filename: `${name}.html`,
-  chunks: [`${name}`],
-}));
-
 module.exports = {
   entry: {
-    index: './src/index.js',
-    bookmarks: './src/bookmarks.js',
+    index: './src/app/index.js',
+    bookmarks: './src/app/bookmarks.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[chunkhash].js',
+    // publicPath: path.resolve(__dirname, 'dist'),
+    // publicPath: './',
   },
   module: {
     rules: [
@@ -98,13 +92,19 @@ module.exports = {
       canPrint: true,
     }),
 
-    // new HtmlWebpackPlugin({
-    //   inject: false,
-    //   template: './src/index.html',
-    //   filename: 'index.html',
-    // }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: './src/pages/bookmarks.html',
+      filename: './bookmarks.html',
+      chunks: ['bookmarks'],
+    }),
 
-    ...multipleHtmlPlugins,
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: './src/index.html',
+      filename: 'index.html',
+      chunks: ['index'],
+    }),
 
     new WebpackMd5Hash(),
 
