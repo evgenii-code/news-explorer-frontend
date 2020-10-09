@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head profile="http://www.w3.org/2005/10/profile">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,7 @@
 </head>
 <body class="body font font_family_roboto">
   <!-- Попап "Вход" -->
+  <!-- popup_is-opened - класс для открытия попапа -->
   <div class="body__popup popup">
     <div class="popup__content">
       <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
@@ -35,8 +36,8 @@
                 minlength="2"
                 maxlength="30"
                 required>
-          <p class="popup__error" aria-live="polite">Неправильный формат email</p>
         </label>
+        <p class="popup__error" aria-live="polite">Неправильный формат email</p>
 
         <label class="popup__label">Пароль
           <input
@@ -46,8 +47,8 @@
                 placeholder="Введите пароль"
                 minlength="8"
                 required>
-          <p class="popup__error" aria-live="polite"></p>
         </label>
+        <p class="popup__error" aria-live="polite"></p>
 
         <p class="popup__error popup__error_align_center" aria-live="polite"></p>
 
@@ -59,7 +60,6 @@
   </div>
 
   <!-- Попап "Регистрация" -->
-  <!-- popup_is-opened - класс для открытия попапа -->
   <div class="body__popup popup">
     <div class="popup__content">
       <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
@@ -76,8 +76,8 @@
                 minlength="2"
                 maxlength="30"
                 required>
-          <p class="popup__error" aria-live="polite">Неправильный формат email</p>
         </label>
+        <p class="popup__error" aria-live="polite">Неправильный формат email</p>
 
         <label class="popup__label">Пароль
           <input
@@ -87,8 +87,8 @@
                 placeholder="Введите пароль"
                 minlength="8"
                 required>
-          <p class="popup__error" aria-live="polite"></p>
         </label>
+        <p class="popup__error" aria-live="polite"></p>
 
         <label class="popup__label">Имя
           <input
@@ -99,8 +99,8 @@
                 minlength="2"
                 maxlength="30"
                 required>
-          <p class="popup__error" aria-live="polite"></p>
         </label>
+        <p class="popup__error" aria-live="polite"></p>
 
         <p class="popup__error popup__error_align_center" aria-live="polite">Такой пользователь уже существует</p>
 
@@ -187,6 +187,7 @@
             </div>
 
             <picture>
+              <source srcset="<%=require('./assets/images/card.jpg')%>" media="(max-width: 480px)">
               <img
                 src="<%=require('./assets/images/card.jpg')%>"
                 alt="Фотография к новости"
@@ -194,7 +195,7 @@
             </picture>
 
             <div class="card__container">
-              <time class="font font_family_source card__date">2 августа, 2019</time>
+              <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
               <h3 class="font font_family_roboto-slab card__title">Национальное достояние – парки</h3>
               <p class="card__description">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.</p>
               <address class="font font_family_roboto-slab card__address">Лента.ру</address>
@@ -207,6 +208,7 @@
             </div>
 
             <picture>
+              <source srcset="<%=require('./assets/images/card.jpg')%>" media="(max-width: 480px)">
               <img
                 src="<%=require('./assets/images/card.jpg')%>"
                 alt="Фотография к новости"
@@ -214,7 +216,7 @@
             </picture>
 
             <div class="card__container">
-              <time class="font font_family_source card__date ">2 августа, 2019</time>
+              <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
               <h3 class="font font_family_roboto-slab card__title">Лесные огоньки: история одной фотографии</h3>
               <p class="card__description">Фотограф отвлеклась от освещения суровой политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного из местных чудес природы.</p>
               <address class="font font_family_roboto-slab card__address">Афиша</address>
@@ -227,6 +229,7 @@
             </div>
 
             <picture>
+              <source srcset="<%=require('./assets/images/card.jpg')%>" media="(max-width: 480px)">
               <img
                 src="<%=require('./assets/images/card.jpg')%>"
                 alt="Фотография к новости"
@@ -234,7 +237,7 @@
             </picture>
 
             <div class="card__container">
-              <time class="font font_family_source card__date">2 августа, 2019</time>
+              <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
               <h3 class="font font_family_roboto-slab card__title ">«Первозданная тайга»: новый фотопроект Игоря Шпиленка</h3>
               <p class="card__description">Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где...</p>
               <address class="font font_family_roboto-slab card__address">Медиазона</address>
@@ -249,7 +252,7 @@
     <section class="author main__author">
       <div class="container author__container">
         <picture>
-          <source src="<%=require('./assets/images/author-avatar-small.jpg')%>" media="(min-width: 480px)">
+          <source srcset="<%=require('./assets/images/author-avatar-small.jpg')%>" media="(max-width: 480px)">
           <img src="<%=require('./assets/images/author-avatar-normal.jpg')%>" alt="Фото автора" class="author__image">
         </picture>
 

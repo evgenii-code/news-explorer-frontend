@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head profile="http://www.w3.org/2005/10/profile">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
@@ -48,9 +48,9 @@
   <main class="main body__main">
     <section class="font font_color_dark info main__info">
       <div class="container info__container">
-        <h2 class="info__name">Сохранённые статьи</h1>
+        <h2 class="info__name">Сохранённые статьи</h2>
 
-        <h3 class="font font_family_roboto-slab title info__title">Грета, у вас 5 сохранённых статей</h2>
+        <h3 class="font font_family_roboto-slab title info__title">Грета, у вас 5 сохранённых статей</h3>
 
         <p class="description info__description">По ключевым словам: <b class="info__description info__description_style_bold">Природа</b>, <b class="info__description info__description_style_bold">Тайга</b> и <b class="info__description info__description_style_bold">2 другим</b></p>
       </div>
@@ -67,6 +67,7 @@
             </div>
 
             <picture>
+              <source srcset="../<%=require('../../assets/images/card.jpg')%>" media="(max-width: 480px)">
               <img
                 src="../<%=require('../../assets/images/card.jpg')%>"
                 alt="Фотография к новости"
@@ -74,7 +75,7 @@
             </picture>
 
             <div class="card__container">
-              <time class="font font_family_source card__date ">2 августа, 2019</time>
+              <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
               <h3 class="font font_family_roboto-slab card__title">Национальное достояние – парки</h3>
               <p class="card__description">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.</p>
               <address class="font font_family_roboto-slab card__address">Лента.ру</address>
@@ -89,6 +90,7 @@
             </div>
 
             <picture>
+              <source srcset="../<%=require('../../assets/images/card.jpg')%>" media="(max-width: 480px)">
               <img
                 src="../<%=require('../../assets/images/card.jpg')%>"
                 alt="Фотография к новости"
@@ -96,7 +98,7 @@
             </picture>
 
             <div class="card__container">
-              <time class="font font_family_source card__date">2 августа, 2019</time>
+              <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
               <h3 class="font font_family_roboto-slab card__title ">Лесные огоньки: история одной фотографии</h3>
               <p class="card__description">Фотограф отвлеклась от освещения суровой политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного из местных чудес природы.</p>
               <address class="font font_family_roboto-slab card__address">Афиша</address>
@@ -111,6 +113,7 @@
             </div>
 
             <picture>
+              <source srcset="../<%=require('../../assets/images/card.jpg')%>" media="(max-width: 480px)">
               <img
                 src="../<%=require('../../assets/images/card.jpg')%>"
                 alt="Фотография к новости"
@@ -118,7 +121,7 @@
             </picture>
 
             <div class="card__container">
-              <time class="font font_family_source card__date">2 августа, 2019</time>
+              <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
               <h3 class="font font_family_roboto-slab card__title">«Первозданная тайга»: новый фотопроект Игоря Шпиленка</h3>
               <p class="card__description">Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где...</p>
               <address class="font font_family_roboto-slab card__address">Медиазона</address>
