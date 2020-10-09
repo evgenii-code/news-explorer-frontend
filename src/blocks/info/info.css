@@ -4,5 +4,5 @@
 @import url('./__title/info__title.css');
 
 .info {
-
+  min-height: 294px;
 }

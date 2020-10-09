@@ -96,14 +96,14 @@ module.exports = {
       inject: false,
       template: './src/pages/bookmarks/index.html',
       filename: 'bookmarks/index.html',
-      hash: true,
+      chunks: ['bookmarks'],
     }),
 
     new HtmlWebpackPlugin({
       inject: false,
       template: './src/index.html',
       filename: 'index.html',
-      hash: true,
+      chunks: ['main'],
     }),
 
     new WebpackMd5Hash(),
