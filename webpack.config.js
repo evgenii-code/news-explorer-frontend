@@ -2,22 +2,17 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
-const webpack = require('webpack');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
 
-const isDev = process.env.NODE_ENV === 'development';
-
 module.exports = {
   entry: {
-    index: './src/app/index.js',
-    bookmarks: './src/app/bookmarks.js',
+    main: './src/index.js',
+    bookmarks: './src/pages/bookmarks/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[chunkhash].js',
-    // publicPath: path.resolve(__dirname, 'dist'),
-    // publicPath: './',
+    filename: (pathData) => (pathData.chunk.name === 'main' ? '[name].[chunkhash].js' : '[name]/[name].[chunkhash].js'),
   },
   module: {
     rules: [
@@ -29,7 +24,12 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          (isDev ? 'style-loader' : MiniCssExtractPlugin.loader),
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../',
+            },
+          },
           {
             loader: 'css-loader',
             options: {
@@ -80,7 +80,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.[contenthash].css',
+      filename: 'styles/style.[contenthash].css',
     }),
 
     new OptimizeCssAssetsPlugin({
@@ -94,22 +94,18 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       inject: false,
-      template: './src/pages/bookmarks.html',
-      filename: './bookmarks.html',
-      chunks: ['bookmarks'],
+      template: './src/pages/bookmarks/index.html',
+      filename: 'bookmarks/index.html',
+      hash: true,
     }),
 
     new HtmlWebpackPlugin({
       inject: false,
       template: './src/index.html',
       filename: 'index.html',
-      chunks: ['index'],
+      hash: true,
     }),
 
     new WebpackMd5Hash(),
-
-    new webpack.DefinePlugin({
-      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-    }),
   ],
 };

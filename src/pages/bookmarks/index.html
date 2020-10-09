@@ -14,7 +14,7 @@
         href="<%= htmlWebpackPlugin.files.css %>">
   <link rel="icon"
         type="image/png"
-        href="<%=require('../assets/ui/icons/favicon.svg')%>">
+        href="../<%=require('../../assets/ui/icons/favicon.svg')%>">
   <title>NewsExplorer</title>
 </head>
 <body class="body font font_family_roboto">
@@ -29,13 +29,13 @@
 
         <ul class="menu__list header__menu-list">
           <li class="menu__item">
-            <a href="index.html" class="font font_family_roboto-slab menu__logo">NewsExplorer</a>
+            <a href="../" class="font font_family_roboto-slab menu__logo">NewsExplorer</a>
           </li>
           <li class="menu__item">
-            <a href="index.html" class="link menu__link menu__link_theme_dark">Главная</a>
+            <a href="../" class="link menu__link menu__link_theme_dark">Главная</a>
           </li>
           <li class="menu__item">
-            <a href="bookmarks.html" class="link menu__link menu__link_active menu__link_theme_dark">Сохранённые статьи</a>
+            <a href="../bookmarks/" class="link menu__link menu__link_active menu__link_theme_dark">Сохранённые статьи</a>
           </li>
           <li class="menu__item">
             <button class="button button_type_dark button_type_transparent button_logout_dark menu__button">Грета</button>
@@ -68,7 +68,7 @@
 
             <picture>
               <img
-                src="<%=require('../assets/images/card.jpg')%>"
+                src="../<%=require('../../assets/images/card.jpg')%>"
                 alt="Фотография к новости"
                 class="card__image">
             </picture>
@@ -90,7 +90,7 @@
 
             <picture>
               <img
-                src="<%=require('../assets/images/card.jpg')%>"
+                src="../<%=require('../../assets/images/card.jpg')%>"
                 alt="Фотография к новости"
                 class="card__image">
             </picture>
@@ -112,7 +112,7 @@
 
             <picture>
               <img
-                src="<%=require('../assets/images/card.jpg')%>"
+                src="../<%=require('../../assets/images/card.jpg')%>"
                 alt="Фотография к новости"
                 class="card__image">
             </picture>
@@ -136,7 +136,7 @@
       <ul class="footer__items footer__items_direction_column">
         <li class="footer__item footer__item_direction_column">
           <a
-            href="index.html"
+            href="../"
             class="link footer__link"
           >Главная</a>
         </li>
@@ -158,7 +158,7 @@
             target="_blank"
             class="footer__link"
           >
-            <img src="<%=require('../assets/ui/logos/github.svg')%>" alt="Github лого" class="footer__logo">
+            <img src="../<%=require('../../assets/ui/logos/github.svg')%>" alt="Github лого" class="footer__logo">
           </a>
         </li>
         <li class="footer__item footer__item_direction_row">
@@ -168,7 +168,7 @@
             target="_blank"
             class="footer__link"
           >
-            <img src="<%=require('../assets/ui/logos/facebook.svg')%>" alt="Facebook лого" class="footer__logo">
+            <img src="../<%=require('../../assets/ui/logos/facebook.svg')%>" alt="Facebook лого" class="footer__logo">
           </a>
         </li>
       </ul>
