@@ -1,0 +1,34 @@
+@import url('./__address/card__address.css');
+@import url('./__container/card__container.css');
+@import url('./__date/card__date.css');
+@import url('./__description/card__description.css');
+@import url('./__image/card__image.css');
+@import url('./__title/card__title.css');
+@import url('./__icon-container/card__icon-container.css');
+@import url('./__icon/card__icon.css');
+@import url('./__keyword/card__keyword.css');
+
+.card {
+  position: relative;
+
+  background-color: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+
+  max-width: 400px;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 47.2% 1fr;
+}
+
+@media screen and (max-width: 1024px) {
+  .card {
+    grid-template-rows: 35.7% 1fr;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .card {
+    grid-template-rows: 44.5% 1fr;
+  }
+}

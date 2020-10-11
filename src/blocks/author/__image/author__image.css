@@ -1,0 +1,18 @@
+.author__image {
+  border-radius: 50%;
+  width: 100%;
+  max-width: 464px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+  .author__image {
+    max-width: 232px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .author__image {
+    max-width: 272px;
+  }
+}

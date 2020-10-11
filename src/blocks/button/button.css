@@ -1,0 +1,36 @@
+@import url('./_type/button_type_dark.css');
+@import url('./_type/button_type_light.css');
+@import url('./_type/button_type_transparent.css');
+@import url('./_type/button_type_colored.css');
+@import url('./_logout/button_logout_dark.css');
+@import url('./_logout/button_logout_light.css');
+
+.button {
+  border-radius: 100px;
+  border-width: 1px;
+  border-style: solid;
+
+  cursor: pointer;
+
+  color: inherit;
+  font-weight: inherit;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  background-color: #E6E8EB;
+  border-color: #E6E8EB;
+  color: #B6BCBF;
+}
+
+.button::after {
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+  margin-left: 2px;
+}

@@ -1,0 +1,23 @@
+.footer__items_direction_column {
+  margin: 0;
+  margin-left: auto;
+  margin-right: 50px;
+
+  flex-direction: row;
+
+  grid-area: links;
+}
+
+@media screen and (max-width: 768px) {
+  .footer__items_direction_column {
+    margin-right: 15px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .footer__items_direction_column {
+    margin-right: 0;
+    flex-direction: column;
+    width: 100%;
+  }
+}

@@ -1,0 +1,7 @@
+.card__icon_type_unmarked {
+  background-image: url('../../../../assets/ui/icons/bookmark-unmarked-normal.svg');
+}
+
+.card__icon_type_unmarked:hover {
+  background-image: url('../../../../assets/ui/icons/bookmark-unmarked-hover.svg');
+}

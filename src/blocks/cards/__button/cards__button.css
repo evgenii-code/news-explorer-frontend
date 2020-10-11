@@ -1,0 +1,21 @@
+.cards__button {
+  max-width: 288px;
+  width: 100%;
+  min-height: 64px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .cards__button {
+    max-width: 240px;
+    min-height: 56px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .cards__button {
+    max-width: 288px;
+  }
+}

@@ -1,0 +1,16 @@
+.search__button {
+  min-width: 168px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .search__button {
+    position: relative;
+
+    margin-top: 16px;
+    height: 56px;
+  }
+}

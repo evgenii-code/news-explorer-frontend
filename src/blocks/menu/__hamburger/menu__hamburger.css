@@ -1,0 +1,20 @@
+@import url('./_theme/menu__hamburger_theme_dark.css');
+@import url('./_theme/menu__hamburger_theme_light.css');
+
+.menu__hamburger {
+  display: none;
+}
+
+@media screen and (max-width: 720px) {
+  .menu__hamburger {
+    display: inline-block;
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+}

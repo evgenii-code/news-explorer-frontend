@@ -1,0 +1,17 @@
+.header__menu-list {
+
+}
+
+@media screen and (max-width: 720px) {
+  .header__menu-list {
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .header__menu-list {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+}

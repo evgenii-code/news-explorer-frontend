@@ -1,0 +1,13 @@
+@keyframes spin {
+	100% {
+		transform: rotate(-360deg);
+	}
+}
+
+.preloader__image_type_pending {
+	width: 74px;
+  height: 74px;
+  background-image: url('../../../../assets/ui/icons/preloader-circle.png');
+
+	animation: spin .75s infinite linear;
+}

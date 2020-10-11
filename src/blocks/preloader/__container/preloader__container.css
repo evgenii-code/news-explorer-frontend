@@ -1,0 +1,12 @@
+@import url('./_type/preloader__container_type_failed.css');
+@import url('./_type/preloader__container_type_pending.css');
+
+.preloader__container {
+  margin: 0 auto;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

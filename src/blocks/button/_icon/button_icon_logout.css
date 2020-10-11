@@ -1,0 +1,6 @@
+.button_icon_logout::after {
+  content: '';
+  background-image: url('../../../assets/ui/icons/logout.svg');
+  width: 24px;
+  height: 24px;
+}

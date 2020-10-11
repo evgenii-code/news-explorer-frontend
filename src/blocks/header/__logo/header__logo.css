@@ -1,0 +1,18 @@
+.header__logo {
+  /* margin: auto 0; */
+  position: absolute;
+  left: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+@media screen and (max-width: 320px) {
+  .header__logo {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,16 @@
+.author__title {
+  margin: 0;
+  margin-top: 51px;
+}
+
+@media screen and (max-width: 768px) {
+  .author__title {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .author__title {
+    margin-top: 24px;
+  }
+}

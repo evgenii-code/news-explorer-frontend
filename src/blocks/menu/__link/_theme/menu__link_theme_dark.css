@@ -1,0 +1,9 @@
+.menu__link_theme_dark:after {
+  background-color:#000;
+}
+
+@media screen and (max-width: 720px) {
+  .menu__link_theme_dark {
+    color: #fff;
+  }
+}

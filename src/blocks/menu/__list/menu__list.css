@@ -1,0 +1,36 @@
+@keyframes showup {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.menu__list {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: unset;
+}
+
+@media screen and (max-width: 720px) {
+  .menu__list {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+
+    background-color: #1A1B22;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+
+  .menu__checkbox:checked ~ .menu__list {
+    display: flex;
+    animation: showup .2s ease;
+  }
+}

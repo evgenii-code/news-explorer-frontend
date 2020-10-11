@@ -1,0 +1,9 @@
+@import url('./_direction/footer__items_direction_column.css');
+@import url('./_direction/footer__items_direction_row.css');
+
+.footer__items {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
