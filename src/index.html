@@ -20,109 +20,144 @@
 <body class="body font font_family_roboto">
   <!-- Попап "Вход" -->
   <!-- popup_is-opened - класс для открытия попапа -->
-  <div class="body__popup popup">
-    <div class="popup__content">
-      <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
+  <template id="signin-popup">
+    <div class="body__popup popup" data-popup-type="signin">
+      <div class="popup__content">
+        <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
 
-      <h2 class="popup__title">Вход</h2>
+        <h2 class="popup__title">Вход</h2>
 
-      <form class="popup__form font font_family_inter" name="signin">
-        <label class="popup__label">Email
-          <input
-                type="email"
-                name="email"
-                class="popup__input popup__input_type_email"
-                placeholder="Введите почту"
-                minlength="2"
-                maxlength="30"
-                required>
-        </label>
-        <p class="popup__error" aria-live="polite">Неправильный формат email</p>
+        <form class="popup__form font font_family_inter" name="signin">
+          <label class="popup__label">Email
+            <input
+                  type="email"
+                  name="email"
+                  class="popup__input popup__input_type_email"
+                  placeholder="Введите почту"
+                  minlength="2"
+                  maxlength="30"
+                  required>
+          </label>
+          <p class="popup__error" aria-live="polite"></p>
 
-        <label class="popup__label">Пароль
-          <input
-                type="password"
-                name="password"
-                class="popup__input popup__input_type_password"
-                placeholder="Введите пароль"
-                minlength="8"
-                required>
-        </label>
-        <p class="popup__error" aria-live="polite"></p>
+          <label class="popup__label">Пароль
+            <input
+                  type="password"
+                  name="password"
+                  class="popup__input popup__input_type_password"
+                  placeholder="Введите пароль"
+                  minlength="8"
+                  required>
+          </label>
+          <p class="popup__error" aria-live="polite"></p>
 
-        <p class="popup__error popup__error_align_center" aria-live="polite"></p>
+          <p class="popup__error popup__error_align_center" aria-live="polite"></p>
 
-        <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
-      </form>
+          <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
+        </form>
 
-      <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Зарегистрироваться</button></p>
+        <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Зарегистрироваться</button></p>
+      </div>
     </div>
-  </div>
+  </template>
 
   <!-- Попап "Регистрация" -->
-  <div class="body__popup popup">
-    <div class="popup__content">
-      <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
+  <template id="signup-popup">
+    <div class="body__popup popup" data-popup-type="signup">
+      <div class="popup__content">
+        <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
 
-      <h2 class="popup__title">Регистрация</h2>
+        <h2 class="popup__title">Регистрация</h2>
 
-      <form class="popup__form font font_family_inter" name="signup">
-        <label class="popup__label">Email
-          <input
-                type="email"
-                name="email"
-                class="popup__input popup__input_type_email"
-                placeholder="Введите почту"
-                minlength="2"
-                maxlength="30"
-                required>
-        </label>
-        <p class="popup__error" aria-live="polite">Неправильный формат email</p>
+        <form class="popup__form font font_family_inter" name="signup">
+          <label class="popup__label">Email
+            <input
+                  type="email"
+                  name="email"
+                  class="popup__input popup__input_type_email"
+                  placeholder="Введите почту"
+                  minlength="2"
+                  maxlength="30"
+                  required>
+          </label>
+          <p class="popup__error" aria-live="polite"></p>
 
-        <label class="popup__label">Пароль
-          <input
-                type="password"
-                name="password"
-                class="popup__input popup__input_type_password"
-                placeholder="Введите пароль"
-                minlength="8"
-                required>
-        </label>
-        <p class="popup__error" aria-live="polite"></p>
+          <label class="popup__label">Пароль
+            <input
+                  type="password"
+                  name="password"
+                  class="popup__input popup__input_type_password"
+                  placeholder="Введите пароль"
+                  minlength="8"
+                  required>
+          </label>
+          <p class="popup__error" aria-live="polite"></p>
 
-        <label class="popup__label">Имя
-          <input
-                type="text"
-                name="name"
-                class="popup__input popup__input_type_name"
-                placeholder="Введите свое имя"
-                minlength="2"
-                maxlength="30"
-                required>
-        </label>
-        <p class="popup__error" aria-live="polite"></p>
+          <label class="popup__label">Имя
+            <input
+                  type="text"
+                  name="name"
+                  class="popup__input popup__input_type_name"
+                  placeholder="Введите свое имя"
+                  minlength="2"
+                  maxlength="30"
+                  required>
+          </label>
+          <p class="popup__error" aria-live="polite"></p>
 
-        <p class="popup__error popup__error_align_center" aria-live="polite">Такой пользователь уже существует</p>
+          <p class="popup__error popup__error_align_center" aria-live="polite"></p>
 
-        <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
-      </form>
+          <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
+        </form>
 
-      <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Войти</button></p>
+        <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Войти</button></p>
+      </div>
     </div>
-  </div>
+  </template>
 
   <!-- Попап "Успешная регистрация" -->
-  <div class="body__popup popup">
-    <div class="popup__content">
-      <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
+  <template id="success-popup">
+    <div class="body__popup popup" data-popup-type="success">
+      <div class="popup__content">
+        <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
 
-      <h2 class="popup__title">Пользователь успешно зарегистрирован!</h2>
+        <h2 class="popup__title">Пользователь успешно зарегистрирован!</h2>
 
-      <button class="popup__choice popup__choice_display_block">Войти</button>
+        <button class="popup__choice popup__choice_display_block">Войти</button>
+      </div>
     </div>
-  </div>
+  </template>
 
-  <header class="header header_theme_light font font_color_light body__header body__header_position_overlaid">
+  <template id="header">
+    <header class="header body__header">
+      <div class="container header__container">
+        <h1 class="font font_family_roboto-slab header__logo">NewsExplorer</h1>
+
+        <nav class="menu header__menu">
+          <input class="menu__checkbox" type="checkbox">
+
+          <div class="menu__hamburger" tabindex="0"></div>
+
+          <ul class="menu__list header__menu-list">
+            <li class="menu__item">
+              <a href="./" class="font font_family_roboto-slab menu__logo">NewsExplorer</a>
+            </li>
+            <li class="menu__item">
+              <a href="./" class="link menu__link menu__link_active">Главная</a>
+            </li>
+            <li class="menu__item">
+              <a href="./bookmarks/" class="link menu__link">Сохранённые статьи</a>
+            </li>
+            <li class="menu__item">
+              <button class="button button_type_transparent menu__button">Авторизоваться</button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  </template>
+
+  <!-- <header class="header header_theme_light font font_color_light body__header body__header_position_overlaid">
     <div class="container header__container">
       <h1 class="font font_family_roboto-slab header__logo">NewsExplorer</h1>
 
@@ -147,7 +182,7 @@
         </ul>
       </nav>
     </div>
-  </header>
+  </header> -->
 
   <main class="main body__main">
     <section class="font font_color_light search main__search">
@@ -156,7 +191,7 @@
         <p class="description search__description">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
         <form class="search__field">
           <input class="search__input" type="text" placeholder="Введите тему новости" required>
-          <button class="button button_type_colored search__button">Искать</button>
+          <button type="submit" class="button button_type_colored search__button">Искать</button>
         </form>
       </div>
     </section>
