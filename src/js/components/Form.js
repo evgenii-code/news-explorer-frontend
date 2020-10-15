@@ -17,7 +17,7 @@ export default class Form extends BaseComponent {
 
   _validateInputElement({ input }) {
     // валидирует переданный в качестве аргумента инпут;
-
+    console.log('Валидация');
   }
 
   // _validateForm() {

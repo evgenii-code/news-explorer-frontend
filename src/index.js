@@ -6,14 +6,61 @@ import {
   SIGNUP_POPUP_TEMPLATE,
   SUCCESS_POPUP_TEMPLATE,
   SEARCH_FORM,
+  PRELOADER,
 } from './js/constants/elements';
 import {
+  BODY,
   HEADER_SELECTORS,
+  PRELOADER_SELECTORS,
 } from './js/constants/selectors';
+import {
+  PRELOADER_CLASSES,
+} from './js/constants/classes';
 import NEWS_API_OPTIONS from './js/constants/newsApi-config';
 import Popup from './js/components/Popup';
 import NewsApi from './js/api/NewsApi';
 import Form from './js/components/Form';
+import Preloader from './js/components/Preloader';
+
+const newsApi = new NewsApi({ options: NEWS_API_OPTIONS });
+
+const header = new Header({
+  element: HEADER_TEMPLATE,
+  selectors: HEADER_SELECTORS,
+  options: {
+    theme: 'light',
+    overlaid: true,
+  },
+  handlers: [
+    {
+      selector: '.menu__button',
+      eventType: 'click',
+      handler: openPopup,
+    },
+  ],
+});
+
+const searchForm = new Form({
+  element: SEARCH_FORM,
+  handlers: [
+    // {
+    //   selector: '.search__field',
+    //   eventType: 'submit',
+    //   handler: submitSearchForm,
+    // },
+    // {
+    //   selector: '.search__input',
+    //   eventType: 'input',
+    //   handler: submitSearchForm,
+    // },
+  ],
+});
+
+const preloader = new Preloader({
+  element: PRELOADER,
+  selectors: PRELOADER_SELECTORS,
+  classes: PRELOADER_CLASSES,
+});
 
 function closePopup(event) {
   event.preventDefault(event);
@@ -77,33 +124,40 @@ function openPopup(event) {
   return signupPopup.open();
 }
 
-function submitSearchForm(event) {
-  event.preventDefault();
-
-  console.log(event);
+function getInputsOnly(form) {
+  return Array.from(form.elements).filter((element) => element.tagName === 'INPUT');
 }
 
-// const newsApi = new NewsApi({ options: NEWS_API_OPTIONS });
-// newsApi.getNews({ query: 'Путин' })
-//   .then((res) => {
-//     console.log(res);
-//   });
+function getFormData(form) {
+  const inputs = getInputsOnly(form);
 
-const header = new Header({
-  element: HEADER_TEMPLATE,
-  selectors: HEADER_SELECTORS,
-  options: {
-    theme: 'light',
-    overlaid: true,
-  },
-  handlers: [
-    {
-      selector: '.menu__button',
-      eventType: 'click',
-      handler: openPopup,
-    },
-  ],
-});
+  return inputs.reduce((acc, input) => {
+    const result = { ...acc };
+    result[input.name] = input.value;
+    return result;
+  }, {});
+}
+
+function submitSearchForm(event) {
+  event.preventDefault();
+  preloader.render({ type: 'pending' });
+
+  const formData = getFormData(event.target);
+
+  newsApi.getNews({ query: formData.search })
+    .then((res) => {
+      console.log(res);
+
+      if (res.totalResults === 0) {
+        preloader.render({ type: 'failed' });
+      } else {
+        preloader.clear();
+      }
+    })
+    .catch(() => {
+      preloader.render({ type: 'error' });
+    });
+}
 
 header.render({
   props: {
@@ -112,18 +166,4 @@ header.render({
   },
 });
 
-const searchForm = new Form({
-  element: SEARCH_FORM,
-  handlers: [
-    {
-      selector: '.search__button',
-      eventType: 'click',
-      handler: submitSearchForm,
-    },
-    // {
-    //   selector: '.search__input',
-    //   eventType: 'input',
-    //   handler: submitSearchForm,
-    // },
-  ],
-});
+SEARCH_FORM.addEventListener('submit', submitSearchForm);

@@ -190,25 +190,26 @@
         <h2 class="font font_family_roboto-slab search__title">Что в мире творится?</h2>
         <p class="description search__description">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
         <form class="search__field">
-          <input class="search__input" type="text" placeholder="Введите тему новости" required>
+          <input class="search__input" type="text" name="search" placeholder="Введите тему новости" required>
           <button type="submit" class="button button_type_colored search__button">Искать</button>
         </form>
         <p class="search__error" aria-live="polite"></p>
       </div>
     </section>
 
-    <section class="preloader">
+    <section class="preloader preloader_hidden">
       <div class="preloader__container preloader__container_type_pending">
         <div class="preloader__image preloader__image_type_pending"></div>
         <p class="preloader__description">Идет поиск новостей...</p>
       </div>
-    </section>
-
-    <!-- preloader_hidden - класс для скрытия прелоудера -->
-    <section class="preloader">
       <div class="preloader__container preloader__container_type_failed">
         <div class="preloader__image preloader__image_type_failed"></div>
         <p class="preloader__description">К сожалению по вашему запросу ничего не найдено.</p>
+      </div>
+      <div class="preloader__container preloader__container_type_error">
+        <p class="preloader__description">Во время запроса произошла ошибка.</p>
+        <p class="preloader__description">Возможно, проблема с соединением или сервер недоступен.</p>
+        <p class="preloader__description">Подождите немного и попробуйте ещё раз.</p>
       </div>
     </section>
 
