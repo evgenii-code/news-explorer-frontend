@@ -11,7 +11,6 @@ export default class Header extends BaseComponent {
     this.selectors = selectors;
     this.options = options;
     this._applyTheme();
-    this._addHeaderToDOM();
   }
 
   _applyTheme() {
@@ -27,10 +26,6 @@ export default class Header extends BaseComponent {
 
     this.button = this.element.querySelector(this.selectors.menuButton);
     this.button.classList.add(`button_type_${this.options.theme}`);
-  }
-
-  _addHeaderToDOM() {
-    document.body.prepend(this.element);
   }
 
   render({ props }) {

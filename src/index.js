@@ -1,7 +1,8 @@
 import './style.css';
 import Header from './js/components/Header';
 import {
-  HEADER_TEMPLATE,
+  BODY,
+  HEADER,
   SIGNIN_POPUP_TEMPLATE,
   SIGNUP_POPUP_TEMPLATE,
   SUCCESS_POPUP_TEMPLATE,
@@ -9,7 +10,6 @@ import {
   PRELOADER,
 } from './js/constants/elements';
 import {
-  BODY,
   HEADER_SELECTORS,
   PRELOADER_SELECTORS,
 } from './js/constants/selectors';
@@ -25,7 +25,7 @@ import Preloader from './js/components/Preloader';
 const newsApi = new NewsApi({ options: NEWS_API_OPTIONS });
 
 const header = new Header({
-  element: HEADER_TEMPLATE,
+  element: HEADER,
   selectors: HEADER_SELECTORS,
   options: {
     theme: 'light',
