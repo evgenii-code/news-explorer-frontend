@@ -1,6 +1,6 @@
-export const PRELOADER_CLASSES = {
-  preloaderHidden: 'preloader_hidden',
-  containerHidden: 'preloader__container_hidden',
-  containerType: 'preloader__container_type_',
+export const NEWS_CARDS_CLASSES = {
+  containerHidden: 'cards__container_hidden',
+  containerType: 'cards__container_type_',
 };
+
 export const SOME_CLASSES = {};

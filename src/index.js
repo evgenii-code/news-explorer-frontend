@@ -1,5 +1,6 @@
 import './style.css';
 import Header from './js/components/Header';
+
 import {
   BODY,
   HEADER,
@@ -8,19 +9,30 @@ import {
   SUCCESS_POPUP_TEMPLATE,
   SEARCH_FORM,
   PRELOADER,
+  NEWS_CARDS,
+  CARD,
 } from './js/constants/elements';
+
 import {
   HEADER_SELECTORS,
-  PRELOADER_SELECTORS,
+  NEWS_CARDS_SELECTORS,
+  CARD_SELECTORS,
 } from './js/constants/selectors';
+
 import {
-  PRELOADER_CLASSES,
+  NEWS_CARDS_CLASSES,
 } from './js/constants/classes';
+
+import {
+  NEWS_CARDS_ERRORS,
+} from './js/constants/error-messages';
+
 import NEWS_API_OPTIONS from './js/constants/newsApi-config';
 import Popup from './js/components/Popup';
 import NewsApi from './js/api/NewsApi';
 import Form from './js/components/Form';
-import Preloader from './js/components/Preloader';
+import NewsCardsList from './js/components/NewsCardList';
+import NewsCard from './js/components/NewsCard';
 
 const newsApi = new NewsApi({ options: NEWS_API_OPTIONS });
 
@@ -56,10 +68,11 @@ const searchForm = new Form({
   ],
 });
 
-const preloader = new Preloader({
-  element: PRELOADER,
-  selectors: PRELOADER_SELECTORS,
-  classes: PRELOADER_CLASSES,
+const newsCardsList = new NewsCardsList({
+  element: NEWS_CARDS,
+  newsCards: [],
+  selectors: NEWS_CARDS_SELECTORS,
+  classes: NEWS_CARDS_CLASSES,
 });
 
 function closePopup(event) {
@@ -140,22 +153,30 @@ function getFormData(form) {
 
 function submitSearchForm(event) {
   event.preventDefault();
-  preloader.render({ type: 'pending' });
+
+  newsCardsList.renderLoader();
 
   const formData = getFormData(event.target);
 
   newsApi.getNews({ query: formData.search })
-    .then((res) => {
-      console.log(res);
+    .then((results) => {
+      console.log(results);
 
-      if (res.totalResults === 0) {
-        preloader.render({ type: 'failed' });
+      if (results.totalResults === 0) {
+        newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.notFound });
       } else {
-        preloader.clear();
+        const newsCards = results.articles.map((result) => new NewsCard({
+          element: CARD,
+          selectors: CARD_SELECTORS,
+          content: result,
+        }).create());
+
+        newsCardsList.renderResults({ newsCards });
       }
     })
-    .catch(() => {
-      preloader.render({ type: 'error' });
+    .catch((error) => {
+      console.log('error', error);
+      newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.serverlError });
     });
 }
 

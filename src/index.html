@@ -197,7 +197,7 @@
       </div>
     </section>
 
-    <section class="preloader preloader_hidden">
+    <!-- <section class="preloader preloader_hidden">
       <div class="preloader__container preloader__container_type_pending">
         <div class="preloader__image preloader__image_type_pending"></div>
         <p class="preloader__description">Идет поиск новостей...</p>
@@ -211,14 +211,24 @@
         <p class="preloader__description">Возможно, проблема с соединением или сервер недоступен.</p>
         <p class="preloader__description">Подождите немного и попробуйте ещё раз.</p>
       </div>
-    </section>
+    </section> -->
 
     <section class="font font_color_dark cards main__cards">
-      <div class="container cards__container">
+      <div class="preloader cards__container cards__container_type_pending cards__container_hidden">
+        <div class="preloader__image preloader__image_type_pending"></div>
+        <p class="preloader__description">Идет поиск новостей...</p>
+      </div>
+
+      <div class="preloader cards__container cards__container_type_error cards__container_hidden">
+        <div class="preloader__image preloader__image_type_failed"></div>
+        <p class="preloader__description preloader__description_type_error">Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.</p>
+      </div>
+
+      <div class="container cards__container cards__container_type_success cards__container_hidden">
         <h2 class="font font_family_roboto-slab title cards__title">Результаты поиска</h2>
 
         <div class="cards__results">
-          <article class="card cards__card">
+          <!-- <article class="card cards__card">
             <div class="card__icon-container card__icon-container_unauth">
               <div class="card__icon card__icon_type_unmarked"></div>
             </div>
@@ -279,7 +289,7 @@
               <p class="card__description">Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где...</p>
               <address class="font font_family_roboto-slab card__address">Медиазона</address>
             </div>
-          </article>
+          </article> -->
         </div>
 
         <button class="button button_type_light cards__button">Показать еще</button>
@@ -348,6 +358,29 @@
       </ul>
     </div>
   </footer>
+
+  <template id="card">
+    <article class="card cards__card">
+      <div class="card__icon-container card__icon-container_unauth">
+        <div class="card__icon card__icon_type_unmarked"></div>
+      </div>
+
+      <picture>
+        <!-- <source srcset="<%=require('./assets/images/card.jpg')%>" media="(max-width: 480px)"> -->
+        <img
+          src="<%=require('./assets/images/card.jpg')%>"
+          alt="Фотография к новости"
+          class="card__image">
+      </picture>
+
+      <div class="card__container">
+        <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
+        <h3 class="font font_family_roboto-slab card__title">Национальное достояние – парки</h3>
+        <p class="card__description">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.</p>
+        <address class="font font_family_roboto-slab card__address">Лента.ру</address>
+      </div>
+    </article>
+  </template>
 
   <script src="<%= htmlWebpackPlugin.files.js %>"></script>
 </body>

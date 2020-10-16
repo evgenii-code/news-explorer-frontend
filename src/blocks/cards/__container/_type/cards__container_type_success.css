@@ -1,0 +1,21 @@
+.cards__container_type_success {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 64px;
+}
+
+@media screen and (max-width: 768px) {
+  .cards__container_type_success {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    grid-gap: 32px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .cards__container_type_success {
+    padding-top: 32px;
+    padding-bottom: 32px;
+    grid-gap: 24px;
+  }
+}
