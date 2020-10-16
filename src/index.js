@@ -73,7 +73,7 @@ function changePopup(event) {
 
   this.close();
 
-  const { popupType } = this.element.dataset;
+  const { popupType } = this._element.dataset;
 
   const signinPopup = new Popup({
     element: (popupType === 'signup') ? SIGNIN_POPUP_TEMPLATE : SIGNUP_POPUP_TEMPLATE,
@@ -97,7 +97,7 @@ function changePopup(event) {
 function openPopup(event) {
   event.preventDefault(event);
 
-  if (this.props.isLoggedIn) {
+  if (this._props.isLoggedIn) {
     return this.render({
       props: {
         isLoggedIn: false,

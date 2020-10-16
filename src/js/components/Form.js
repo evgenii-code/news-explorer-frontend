@@ -3,9 +3,9 @@ import BaseComponent from './BaseComponent';
 export default class Form extends BaseComponent {
   constructor(...args) {
     super(...args);
-    this.inputs = Array.from(this.element.elements)
+    this._inputs = Array.from(this._element.elements)
       .filter((element) => element.tagName === 'INPUT');
-    this.inputs.forEach((input) => {
+    this._inputs.forEach((input) => {
       input.addEventListener('input', () => this._validateInputElement({ input }));
     });
   }

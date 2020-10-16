@@ -5,7 +5,7 @@ export default class Popup extends BaseComponent {
     super(...args);
     // this.selectors = selectors;
     // this.options = options;
-    this.test = 'test';
+    this._test = 'test';
   }
 
   // setContent() {
@@ -19,11 +19,11 @@ export default class Popup extends BaseComponent {
   // }
 
   open() {
-    document.body.prepend(this.element);
+    document.body.prepend(this._element);
   }
 
   close() {
     this._removeHandlers();
-    this.element.remove();
+    this._element.remove();
   }
 }

@@ -1,22 +1,22 @@
 export default class Preloader {
   constructor({ element, selectors, classes }) {
-    this.element = element;
-    this.selectors = selectors;
-    this.classes = classes;
+    this._element = element;
+    this._selectors = selectors;
+    this._classes = classes;
   }
 
   render({ type }) {
-    this.element.classList.remove(this.classes.preloaderHidden);
-    this.element.children.forEach((container) => {
-      container.classList.add(this.classes.containerHidden);
+    this._element.classList.remove(this._classes.preloaderHidden);
+    this._element.children.forEach((container) => {
+      container.classList.add(this._classes.containerHidden);
 
-      if (container.classList.contains(`${this.classes.containerType}${type}`)) {
-        container.classList.remove(this.classes.containerHidden);
+      if (container.classList.contains(`${this._classes.containerType}${type}`)) {
+        container.classList.remove(this._classes.containerHidden);
       }
     });
   }
 
   clear() {
-    this.element.classList.add(this.classes.preloaderHidden);
+    this._element.classList.add(this._classes.preloaderHidden);
   }
 }

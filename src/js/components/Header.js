@@ -8,24 +8,24 @@ export default class Header extends BaseComponent {
     selectors, options, element, handlers,
   }) {
     super({ element, handlers });
-    this.selectors = selectors;
-    this.options = options;
+    this._selectors = selectors;
+    this._options = options;
     this._applyTheme();
   }
 
   _applyTheme() {
-    this.element.classList.add(this.options.overlaid ? 'body__header_position_overlaid' : 'body__header_position_normal');
+    this._element.classList.add(this._options.overlaid ? 'body__header_position_overlaid' : 'body__header_position_normal');
 
-    this.element.classList.add(`header_theme_${this.options.theme}`);
-    this.menu = this.element.querySelector(this.selectors.menuHamburger);
-    this.menu.classList.add(`menu__hamburger_theme_${this.options.theme}`);
+    this._element.classList.add(`header_theme_${this._options.theme}`);
+    this._menu = this._element.querySelector(this._selectors.menuHamburger);
+    this._menu.classList.add(`menu__hamburger_theme_${this._options.theme}`);
 
-    this.element.querySelectorAll(this.selectors.menuLink).forEach((link) => {
-      link.classList.add(`menu__link_theme_${this.options.theme}`);
+    this._element.querySelectorAll(this._selectors.menuLink).forEach((link) => {
+      link.classList.add(`menu__link_theme_${this._options.theme}`);
     });
 
-    this.button = this.element.querySelector(this.selectors.menuButton);
-    this.button.classList.add(`button_type_${this.options.theme}`);
+    this._button = this._element.querySelector(this._selectors.menuButton);
+    this._button.classList.add(`button_type_${this._options.theme}`);
   }
 
   render({ props }) {
@@ -33,14 +33,14 @@ export default class Header extends BaseComponent {
     // У этого объекта есть два обязательных свойства:
     // isLoggedIn — залогинен ли пользователь;
     // userName — имя, которое отображается в шапке залогиненного пользователя.
-    this.props = props;
+    this._props = props;
 
-    if (this.props.isLoggedIn) {
-      this.button.classList.add(`button_logout_${this.options.theme}`);
-      this.button.innerText = props.userName;
+    if (this._props.isLoggedIn) {
+      this._button.classList.add(`button_logout_${this._options.theme}`);
+      this._button.innerText = props.userName;
     } else {
-      this.button.classList.remove(`button_logout_${this.options.theme}`);
-      this.button.innerText = 'Авторизоваться';
+      this._button.classList.remove(`button_logout_${this._options.theme}`);
+      this._button.innerText = 'Авторизоваться';
     }
   }
 }
