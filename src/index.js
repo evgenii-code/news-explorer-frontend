@@ -27,13 +27,42 @@ import {
   NEWS_CARDS_ERRORS,
 } from './js/constants/error-messages';
 
+import {
+  NEWS_API_OPTIONS,
+  MAIN_API_OPTIONS,
+} from './js/constants/api-config';
 import dateFormatter from './js/utils/date-formatter';
-import NEWS_API_OPTIONS from './js/constants/newsApi-config';
-import Popup from './js/components/Popup';
+import MainApi from './js/api/MainApi';
 import NewsApi from './js/api/NewsApi';
+import Popup from './js/components/Popup';
 import Form from './js/components/Form';
 import NewsCardsList from './js/components/NewsCardList';
 import NewsCard from './js/components/NewsCard';
+
+const mainApi = new MainApi({ options: MAIN_API_OPTIONS });
+// mainApi.signin({
+//   email: 'blabla1@bla.com',
+//   password: '12345679',
+// })
+//   .then((res) => {
+//     console.log(res);
+//     saveToken(res.token);
+//   });
+
+mainApi.getUserData(getToken())
+  .then((res) => {
+    console.log(res);
+  });
+
+function saveToken(token) {
+  localStorage.setItem('jwt', token);
+}
+
+function getToken() {
+  return localStorage.getItem('jwt');
+}
+
+// const token = getToken();
 
 const newsApi = new NewsApi({ options: NEWS_API_OPTIONS });
 

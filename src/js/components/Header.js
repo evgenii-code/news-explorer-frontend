@@ -5,12 +5,13 @@ export default class Header extends BaseComponent {
   // // Его конструктор принимает объект опций.
   // // В опциях передается цвет шапки, так как на разных страницах он может быть разный.
   constructor({
-    selectors, options, element, handlers,
+    selectors, options, element, container, handlers,
   }) {
     super({ element, handlers });
     this._selectors = selectors;
     this._options = options;
     this._applyTheme();
+    this._addHeaderToDOM();
   }
 
   _applyTheme() {
@@ -26,6 +27,10 @@ export default class Header extends BaseComponent {
 
     this._button = this._element.querySelector(this._selectors.menuButton);
     this._button.classList.add(`button_type_${this._options.theme}`);
+  }
+
+  _addHeaderToDOM() {
+    document.body.prepend(this._element);
   }
 
   render({ props }) {

@@ -1,21 +1,57 @@
 export default class MainApi {
   // Отвечает за взаимодействие с написанным вами Node.js API.
   // Конструктор этого класса принимает опции, необходимые для инициализации работы с API
+  constructor({
+    options,
+  }) {
+    this.baseUrl = options.baseUrl;
+    this.paths = options.paths;
+  }
 
   // signup() {
   // // регистрирует нового пользователя;
 
   // }
 
-  // signin(){
-  // // аутентифицирует пользователя на основе почты и пароля;
+  signin(user) {
+    // аутентифицирует пользователя на основе почты и пароля;
+    const url = this.baseUrl + this.paths.signin;
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(user),
+    };
 
-  // }
+    return fetch(url, options)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
 
-  // getUserData(){
-  // // возвращает информацию о пользователе;
+        return Promise.reject(new Error(`Ошибка: ${res.status}`));
+      });
+  }
 
-  // }
+  getUserData(token) {
+    // возвращает информацию о пользователе;
+    const url = this.baseUrl + this.paths.userData;
+    const options = {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    };
+
+    return fetch(url, options)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(new Error(`Ошибка: ${res.status}`));
+      });
+  }
 
   // getArticles() {
   // // забирает все статьи;

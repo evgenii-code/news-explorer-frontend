@@ -25,6 +25,11 @@ export default class NewsCard extends BaseComponent {
     return this._element;
   }
 
+  node() {
+    // возвращает разметку элемента
+    return this._element;
+  }
+
   // renderIcon(){
   // // отвечает за отрисовку иконки карточки.
   // // У этой иконки три состояния:
