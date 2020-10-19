@@ -15,6 +15,7 @@ export const NEWS_CARDS_SELECTORS = {
   success: '.cards__container_type_success',
   results: '.cards__results',
   errorMessage: '.preloader__description_type_error',
+  showMoreButton: '.cards__button',
 };
 
 export const CARD_SELECTORS = {

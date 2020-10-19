@@ -27,6 +27,7 @@ import {
   NEWS_CARDS_ERRORS,
 } from './js/constants/error-messages';
 
+import dateFormatter from './js/utils/date-formatter';
 import NEWS_API_OPTIONS from './js/constants/newsApi-config';
 import Popup from './js/components/Popup';
 import NewsApi from './js/api/NewsApi';
@@ -169,6 +170,7 @@ function submitSearchForm(event) {
           element: CARD,
           selectors: CARD_SELECTORS,
           content: result,
+          dateFormatter,
         }).create());
 
         newsCardsList.renderResults({ newsCards });
@@ -176,7 +178,7 @@ function submitSearchForm(event) {
     })
     .catch((error) => {
       console.log('error', error);
-      newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.serverlError });
+      newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.serverError });
     });
 }
 
