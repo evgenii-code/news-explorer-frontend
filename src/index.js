@@ -3,18 +3,11 @@ import Header from './js/components/Header';
 
 import {
   BODY,
-  HEADER,
-  SIGNIN_POPUP_TEMPLATE,
-  SIGNUP_POPUP_TEMPLATE,
-  SUCCESS_POPUP_TEMPLATE,
-  SEARCH_FORM,
-  PRELOADER,
   NEWS_CARDS,
   CARD,
 } from './js/constants/elements';
 
 import {
-  HEADER_SELECTORS,
   NEWS_CARDS_SELECTORS,
   CARD_SELECTORS,
 } from './js/constants/selectors';
@@ -24,7 +17,14 @@ import {
 } from './js/constants/classes';
 
 import {
+  POPUP_CONFIG,
+  HEADER_CONFIG,
+  FORM_CONFIG,
+} from './js/constants/class-configs';
+
+import {
   NEWS_CARDS_ERRORS,
+  FORM_ERRORS,
 } from './js/constants/error-messages';
 
 import {
@@ -39,63 +39,68 @@ import Form from './js/components/Form';
 import NewsCardsList from './js/components/NewsCardList';
 import NewsCard from './js/components/NewsCard';
 
-const mainApi = new MainApi({ options: MAIN_API_OPTIONS });
-// mainApi.signin({
-//   email: 'blabla1@bla.com',
-//   password: '12345679',
-// })
-//   .then((res) => {
-//     console.log(res);
-//     saveToken(res.token);
-//   });
-
-mainApi.getUserData(getToken())
-  .then((res) => {
-    console.log(res);
-  });
+function getToken() {
+  return localStorage.getItem('jwt');
+}
 
 function saveToken(token) {
   localStorage.setItem('jwt', token);
 }
 
-function getToken() {
-  return localStorage.getItem('jwt');
-}
-
-// const token = getToken();
-
+const mainApi = new MainApi({ options: MAIN_API_OPTIONS });
 const newsApi = new NewsApi({ options: NEWS_API_OPTIONS });
 
+const signinForm = new Form({
+  selector: FORM_CONFIG.signinTemplate,
+  errorMessages: FORM_ERRORS,
+  config: FORM_CONFIG,
+  submitHandler(info) {
+    mainApi.signin(info)
+      .then((res) => {
+        saveToken(res.token);
+
+        header.render({
+          props: {
+            isLoggedIn: true,
+            userName: 'dude',
+          },
+        });
+
+        popup.close();
+      })
+      .catch((error) => {
+        // TODO - отрефакторить
+        error.then((data) => {
+          signinForm.setServerError(data);
+        });
+      });
+  },
+});
+
+const signupForm = new Form({
+  selector: FORM_CONFIG.signupTemplate,
+  errorMessages: FORM_ERRORS,
+  config: FORM_CONFIG,
+});
+
+const popup = new Popup({
+  selector: POPUP_CONFIG.popupTemplate,
+  config: POPUP_CONFIG,
+  forms: {
+    signin: signinForm.node(),
+    signup: signupForm.node(),
+    // success: successForm.node(),
+  },
+});
+
 const header = new Header({
-  element: HEADER,
-  selectors: HEADER_SELECTORS,
+  selector: HEADER_CONFIG.headerTemplate,
+  config: HEADER_CONFIG,
   options: {
     theme: 'light',
     overlaid: true,
   },
-  handlers: [
-    {
-      selector: '.menu__button',
-      eventType: 'click',
-      handler: openPopup,
-    },
-  ],
-});
-
-const searchForm = new Form({
-  element: SEARCH_FORM,
-  handlers: [
-    // {
-    //   selector: '.search__field',
-    //   eventType: 'submit',
-    //   handler: submitSearchForm,
-    // },
-    // {
-    //   selector: '.search__input',
-    //   eventType: 'input',
-    //   handler: submitSearchForm,
-    // },
-  ],
+  openPopupMethod: popup.open,
 });
 
 const newsCardsList = new NewsCardsList({
@@ -105,117 +110,59 @@ const newsCardsList = new NewsCardsList({
   classes: NEWS_CARDS_CLASSES,
 });
 
-function closePopup(event) {
-  event.preventDefault(event);
+const searchForm = new Form({
+  selector: FORM_CONFIG.searchTemplate,
+  errorMessages: FORM_ERRORS,
+  config: FORM_CONFIG,
+  submitHandler(info) {
+    newsCardsList.renderLoader();
 
-  this.close();
-}
+    newsApi.getNews({ query: info.search })
+      .then((results) => {
+        console.log(results);
 
-function changePopup(event) {
-  event.preventDefault(event);
+        if (results.totalResults === 0) {
+          newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.notFound });
+        } else {
+          const newsCards = results.articles.map((result) => new NewsCard({
+            element: CARD,
+            selectors: CARD_SELECTORS,
+            content: result,
+            dateFormatter,
+          }).create());
 
-  this.close();
+          newsCardsList.renderResults({ newsCards });
+        }
+      })
+      .catch((error) => {
+        console.log('error', error);
+        newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.serverError });
+      });
+  },
+});
 
-  const { popupType } = this._element.dataset;
+mainApi.getUserData(getToken())
+  .then((userData) => {
+    console.log(userData.data);
 
-  const signinPopup = new Popup({
-    element: (popupType === 'signup') ? SIGNIN_POPUP_TEMPLATE : SIGNUP_POPUP_TEMPLATE,
-    handlers: [
-      {
-        selector: '.popup__close',
-        eventType: 'click',
-        handler: closePopup,
+    header.render({
+      props: {
+        isLoggedIn: true,
+        userName: userData.data.name,
       },
-      {
-        selector: '.popup__choice',
-        eventType: 'click',
-        handler: changePopup,
-      },
-    ],
-  });
+    });
 
-  signinPopup.open();
-}
+    return [ header ];
+  })
+  .then(([ header ]) => {
+    console.log(header);
+  })
+  .catch((error) => {
+    console.log(error);
 
-function openPopup(event) {
-  event.preventDefault(event);
-
-  if (this._props.isLoggedIn) {
-    return this.render({
+    header.render({
       props: {
         isLoggedIn: false,
       },
     });
-  }
-
-  const signupPopup = new Popup({
-    element: SIGNIN_POPUP_TEMPLATE,
-    handlers: [
-      {
-        selector: '.popup__close',
-        eventType: 'click',
-        handler: closePopup,
-      },
-      {
-        selector: '.popup__choice',
-        eventType: 'click',
-        handler: changePopup,
-      },
-    ],
   });
-
-  return signupPopup.open();
-}
-
-function getInputsOnly(form) {
-  return Array.from(form.elements).filter((element) => element.tagName === 'INPUT');
-}
-
-function getFormData(form) {
-  const inputs = getInputsOnly(form);
-
-  return inputs.reduce((acc, input) => {
-    const result = { ...acc };
-    result[input.name] = input.value;
-    return result;
-  }, {});
-}
-
-function submitSearchForm(event) {
-  event.preventDefault();
-
-  newsCardsList.renderLoader();
-
-  const formData = getFormData(event.target);
-
-  newsApi.getNews({ query: formData.search })
-    .then((results) => {
-      console.log(results);
-
-      if (results.totalResults === 0) {
-        newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.notFound });
-      } else {
-        const newsCards = results.articles.map((result) => new NewsCard({
-          element: CARD,
-          selectors: CARD_SELECTORS,
-          content: result,
-          dateFormatter,
-        }).create());
-
-        newsCardsList.renderResults({ newsCards });
-      }
-    })
-    .catch((error) => {
-      console.log('error', error);
-      newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.serverError });
-    });
-}
-
-header.render({
-  props: {
-    isLoggedIn: true,
-    userName: 'Грета',
-  },
-});
-
-SEARCH_FORM.addEventListener('submit', submitSearchForm);
