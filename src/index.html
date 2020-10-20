@@ -20,14 +20,116 @@
 <body class="body font font_family_roboto">
   <!-- Попап "Вход" -->
   <!-- popup_is-opened - класс для открытия попапа -->
+
+  <template id="popup-template">
+    <div class="body__popup popup" data-popup-type="signin">
+      <div class="popup__content">
+        <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
+
+        <h2 class="popup__title font font_family_roboto">Вход</h2>
+
+        <div class="popup__container"></div>
+
+        <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Зарегистрироваться</button></p>
+      </div>
+    </div>
+  </template>
+
+  <template id="signin-template">
+    <form class="popup__form font font_family_inter" name="signin" data-content-type="signin">
+      <label class="popup__label">Email
+        <input
+              id="email-input"
+              type="email"
+              name="email"
+              class="popup__input popup__input_type_email"
+              placeholder="Введите почту"
+              minlength="2"
+              maxlength="30"
+              required>
+              <p id="email-input-error" class="popup__error" aria-live="polite"></p>
+      </label>
+
+      <label class="popup__label">Пароль
+        <input
+              id="password-input"
+              type="password"
+              name="password"
+              class="popup__input popup__input_type_password"
+              placeholder="Введите пароль"
+              minlength="8"
+              required>
+              <p id="password-input-error" class="popup__error" aria-live="polite"></p>
+      </label>
+
+      <p class="popup__error popup__error_align_center" aria-live="polite"></p>
+
+      <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
+    </form>
+  </template>
+
+  <template id="signup-template">
+    <form class="popup__form font font_family_inter" name="signup" data-content-type="signup">
+      <label class="popup__label">Email
+        <input
+              id="email-input"
+              type="email"
+              name="email"
+              class="popup__input popup__input_type_email"
+              placeholder="Введите почту"
+              minlength="2"
+              maxlength="30"
+              required>
+              <p id="email-input-error" class="popup__error" aria-live="polite"></p>
+      </label>
+
+      <label class="popup__label">Пароль
+        <input
+              id="password-input"
+              type="password"
+              name="password"
+              class="popup__input popup__input_type_password"
+              placeholder="Введите пароль"
+              minlength="8"
+              required>
+              <p id="password-input-error" class="popup__error" aria-live="polite"></p>
+      </label>
+
+      <label class="popup__label">Имя
+        <input
+              id="name-input"
+              type="text"
+              name="name"
+              class="popup__input popup__input_type_name"
+              placeholder="Введите свое имя"
+              minlength="2"
+              maxlength="30"
+              required>
+              <p id="name-input-error" class="popup__error" aria-live="polite"></p>
+      </label>
+
+      <p class="popup__error popup__error_align_center" aria-live="polite"></p>
+
+      <button name="signinButton" class="button button_type_colored popup__button" disabled>Регистрация</button>
+    </form>
+  </template>
+
+  <template id="success-template">
+    <div class="popup__message">
+      <h2 class="popup__title">Пользователь успешно зарегистрирован!</h2>
+
+      <button class="popup__choice popup__choice_display_block">Войти</button>
+    </div>
+  </template>
+
   <template id="signin-popup">
     <div class="body__popup popup" data-popup-type="signin">
       <div class="popup__content">
         <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
 
-        <h2 class="popup__title">Вход</h2>
-
         <form class="popup__form font font_family_inter" name="signin">
+          <h2 class="popup__title font font_family_roboto">Вход</h2>
+
           <label class="popup__label">Email
             <input
                   type="email"
@@ -54,9 +156,9 @@
           <p class="popup__error popup__error_align_center" aria-live="polite"></p>
 
           <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
-        </form>
 
-        <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Зарегистрироваться</button></p>
+          <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Зарегистрироваться</button></p>
+        </form>
       </div>
     </div>
   </template>
@@ -67,9 +169,9 @@
       <div class="popup__content">
         <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
 
-        <h2 class="popup__title">Регистрация</h2>
-
         <form class="popup__form font font_family_inter" name="signup">
+          <h2 class="popup__title font font_family_roboto">Регистрация</h2>
+
           <label class="popup__label">Email
             <input
                   type="email"
@@ -108,9 +210,9 @@
           <p class="popup__error popup__error_align_center" aria-live="polite"></p>
 
           <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
-        </form>
 
-        <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Войти</button></p>
+          <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Войти</button></p>
+        </form>
       </div>
     </div>
   </template>
@@ -121,14 +223,16 @@
       <div class="popup__content">
         <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
 
-        <h2 class="popup__title">Пользователь успешно зарегистрирован!</h2>
+        <!-- <div class="popup__container"> -->
+          <h2 class="popup__title">Пользователь успешно зарегистрирован!</h2>
 
-        <button class="popup__choice popup__choice_display_block">Войти</button>
+          <button class="popup__choice popup__choice_display_block">Войти</button>
+        <!-- </div> -->
       </div>
     </div>
   </template>
 
-  <template id="header">
+  <!-- <template id="header"> -->
     <header class="header body__header">
       <div class="container header__container">
         <h1 class="font font_family_roboto-slab header__logo">NewsExplorer</h1>
@@ -155,7 +259,7 @@
         </nav>
       </div>
     </header>
-  </template>
+  <!-- </template> -->
 
   <!-- <header class="header header_theme_light font font_color_light body__header body__header_position_overlaid">
     <div class="container header__container">
@@ -190,10 +294,10 @@
         <h2 class="font font_family_roboto-slab search__title">Что в мире творится?</h2>
         <p class="description search__description">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
         <form class="search__field">
-          <input class="search__input" type="text" name="search" placeholder="Введите тему новости" required>
+          <input id="search-input" class="search__input" type="text" name="search" placeholder="Введите тему новости" required>
+          <span id="search-input-error" class="search__error" aria-live="polite"></span>
           <button type="submit" class="button button_type_colored search__button">Искать</button>
         </form>
-        <p class="search__error" aria-live="polite"></p>
       </div>
     </section>
 

@@ -2,7 +2,7 @@
   color: #fff;
   margin: 0;
   position: absolute;
-  bottom: 40px;
+  bottom: -40px;
   left: 0;
   width: 100%;
   display: flex;
@@ -11,12 +11,12 @@
 
 @media screen and (max-width: 786px) {
   .search__error {
-    bottom: 20px;
+    bottom: -30px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .search__error {
-    bottom: 10px;
+    bottom: -24px;
   }
 }
