@@ -30,6 +30,9 @@ export default class MainApi {
           return res.json();
         }
 
+        // TODO - рефактор
+        if (res.status >= 400 && res.status < 500) return Promise.reject(res.json());
+
         return Promise.reject(new Error(`Ошибка: ${res.status}`));
       });
   }
