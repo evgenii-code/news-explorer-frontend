@@ -10,8 +10,9 @@ export default class Header {
     this._options = options;
     this._loggedOnlyLink = this._element.querySelector(this._config.loggedOnlyLink);
     this._openPopupMethod = openPopupMethod;
-    this._logoutMethod = logoutMethod;
-    this._buttonClickHandler = this._buttonClickHandler.bind(this);
+    // this._logoutMethod = logoutMethod;
+    this._logoutMethod = logoutMethod.bind(this);
+    // this._buttonClickHandler = this._buttonClickHandler.bind(this);
     this._applyTheme();
     this._setHandlers();
   }
@@ -32,24 +33,25 @@ export default class Header {
     this._button.classList.add(this._config.buttonTypeTemplate + this._options.theme);
   }
 
-  _buttonClickHandler(event) {
-    event.preventDefault(event);
+  // _buttonClickHandler(event) {
+  //   event.preventDefault(event);
 
-    if (this._props.isLoggedIn) {
-      this._logoutMethod();
+  //   if (this._props.isLoggedIn) {
+  //     this._logoutMethod();
 
-      return this.render({
-        props: {
-          isLoggedIn: false,
-        },
-      });
-    }
+  //     return this.render({
+  //       props: {
+  //         isLoggedIn: false,
+  //       },
+  //     });
+  //   }
 
-    return this._openPopupMethod();
-  }
+  //   return this._openPopupMethod();
+  // }
 
   _setHandlers() {
-    this._button.addEventListener('click', this._buttonClickHandler);
+    // this._button.addEventListener('click', this._buttonClickHandler);
+    this._button.addEventListener('click', this._logoutMethod);
   }
 
   render({ props }) {
