@@ -59,14 +59,19 @@ const signinForm = new Form({
       .then((res) => {
         saveToken(res.token);
 
-        header.render({
-          props: {
-            isLoggedIn: true,
-            userName: 'dude',
-          },
-        });
+        mainApi.getUserData(res.token) // TODO - Рефактор
+          .then((userData) => {
+            console.log(userData.data);
 
-        popup.close();
+            header.render({
+              props: {
+                isLoggedIn: true,
+                userName: userData.data.name,
+              },
+            });
+
+            popup.close();
+          });
       })
       .catch((error) => {
         // TODO - отрефакторить
@@ -101,6 +106,9 @@ const header = new Header({
     overlaid: true,
   },
   openPopupMethod: popup.open,
+  logoutMethod() {
+    localStorage.removeItem('jwt');
+  },
 });
 
 const newsCardsList = new NewsCardsList({

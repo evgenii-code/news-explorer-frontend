@@ -3,14 +3,14 @@ export default class Header {
   // // Его конструктор принимает объект опций.
   // // В опциях передается цвет шапки, так как на разных страницах он может быть разный.
   constructor({
-    selector, config, options, openPopupMethod, signupPopupOpenMethod, signinPopupOpenMethod,
+    selector, config, options, openPopupMethod, logoutMethod,
   }) {
     this._element = document.querySelector(selector);
     this._config = config;
     this._options = options;
+    this._loggedOnlyLink = this._element.querySelector(this._config.loggedOnlyLink);
     this._openPopupMethod = openPopupMethod;
-    this._signupPopupOpenMethod = signupPopupOpenMethod;
-    this._signinPopupOpenMethod = signinPopupOpenMethod;
+    this._logoutMethod = logoutMethod;
     this._buttonClickHandler = this._buttonClickHandler.bind(this);
     this._applyTheme();
     this._setHandlers();
@@ -36,6 +36,8 @@ export default class Header {
     event.preventDefault(event);
 
     if (this._props.isLoggedIn) {
+      this._logoutMethod();
+
       return this.render({
         props: {
           isLoggedIn: false,
@@ -60,9 +62,11 @@ export default class Header {
     if (this._props.isLoggedIn) {
       this._button.classList.add(this._config.buttonLogoutTypeTemplate + this._options.theme);
       this._button.innerText = props.userName;
+      this._loggedOnlyLink.classList.remove(this._config.menuItemHidden);
     } else {
       this._button.classList.remove(this._config.buttonLogoutTypeTemplate + this._options.theme);
       this._button.innerText = this._config.buttonText;
+      this._loggedOnlyLink.classList.add(this._config.menuItemHidden);
     }
   }
 }

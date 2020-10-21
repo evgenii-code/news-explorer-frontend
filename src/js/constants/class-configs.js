@@ -27,6 +27,8 @@ export const HEADER_CONFIG = {
   buttonTypeTemplate: 'button_type_',
   buttonLogoutTypeTemplate: 'button_logout_',
   buttonText: 'Авторизоваться',
+  menuItemHidden: 'menu__item_hidden',
+  loggedOnlyLink: '#logged-only-link',
 };
 
 export const FORM_CONFIG = {
