@@ -1,25 +1,11 @@
 import './style.css';
-import Header from './js/components/Header';
-
-import {
-  BODY,
-  NEWS_CARDS,
-  CARD,
-} from './js/constants/elements';
-
-import {
-  NEWS_CARDS_SELECTORS,
-  CARD_SELECTORS,
-} from './js/constants/selectors';
-
-import {
-  NEWS_CARDS_CLASSES,
-} from './js/constants/classes';
 
 import {
   POPUP_CONFIG,
   HEADER_CONFIG,
   FORM_CONFIG,
+  NEWS_CARDS_CONFIG,
+  CARD_CONFIG,
 } from './js/constants/class-configs';
 
 import {
@@ -31,9 +17,12 @@ import {
   NEWS_API_OPTIONS,
   MAIN_API_OPTIONS,
 } from './js/constants/api-config';
+
 import dateFormatter from './js/utils/date-formatter';
 import MainApi from './js/api/MainApi';
 import NewsApi from './js/api/NewsApi';
+import User from './js/components/User';
+import Header from './js/components/Header';
 import Popup from './js/components/Popup';
 import Form from './js/components/Form';
 import NewsCardsList from './js/components/NewsCardList';
@@ -47,8 +36,25 @@ function saveToken(token) {
   localStorage.setItem('jwt', token);
 }
 
+const user = new User();
 const mainApi = new MainApi({ options: MAIN_API_OPTIONS });
 const newsApi = new NewsApi({ options: NEWS_API_OPTIONS });
+
+const renderLoggedUser = (token) => mainApi.getUserData(token)
+  .then((userData) => {
+    user.loggedIn(userData.data.name);
+
+    header.render({
+      props: user.getStatus(),
+    });
+  })
+  .catch(() => {
+    user.loggedOut();
+
+    header.render({
+      props: user.getStatus(),
+    });
+  });
 
 const signinForm = new Form({
   selector: FORM_CONFIG.signinTemplate,
@@ -59,17 +65,8 @@ const signinForm = new Form({
       .then((res) => {
         saveToken(res.token);
 
-        mainApi.getUserData(res.token) // TODO - Рефактор
-          .then((userData) => {
-            console.log(userData.data);
-
-            header.render({
-              props: {
-                isLoggedIn: true,
-                userName: userData.data.name,
-              },
-            });
-
+        renderLoggedUser(res.token)
+          .then(() => {
             popup.close();
           });
       })
@@ -86,14 +83,29 @@ const signupForm = new Form({
   selector: FORM_CONFIG.signupTemplate,
   errorMessages: FORM_ERRORS,
   config: FORM_CONFIG,
+  submitHandler: (info) => {
+    mainApi.signup(info)
+      .then((res) => {
+        console.log(res);
+
+        popup.clearContent();
+        popup.setContent('Успешно!'); // TODO - Вставить правильный контент
+      })
+      .catch((error) => {
+        // TODO - отрефакторить
+        error.then((data) => {
+          signupForm.setServerError(data);
+        });
+      });
+  },
 });
 
 const popup = new Popup({
   selector: POPUP_CONFIG.popupTemplate,
   config: POPUP_CONFIG,
-  forms: {
-    signin: signinForm.node(),
-    signup: signupForm.node(),
+  content: {
+    signinElement: signinForm.node(), // получаю элемент формы
+    signupElement: signupForm.node(),
     // success: successForm.node(),
   },
 });
@@ -106,16 +118,28 @@ const header = new Header({
     overlaid: true,
   },
   openPopupMethod: popup.open,
-  logoutMethod() {
-    localStorage.removeItem('jwt');
+  // logoutMethod() {
+  //   localStorage.removeItem('jwt');
+  // },
+  logoutMethod: (event) => {
+    event.preventDefault(event);
+
+    if (user.getStatus().isLoggedIn) {
+      localStorage.removeItem('jwt');
+
+      user.loggedOut();
+
+      return header.render({ props: user.getStatus() });
+    }
+
+    return popup.open();
   },
 });
 
 const newsCardsList = new NewsCardsList({
-  element: NEWS_CARDS,
+  selector: NEWS_CARDS_CONFIG.newsCardsTemplate,
+  config: NEWS_CARDS_CONFIG,
   newsCards: [],
-  selectors: NEWS_CARDS_SELECTORS,
-  classes: NEWS_CARDS_CLASSES,
 });
 
 const searchForm = new Form({
@@ -132,12 +156,45 @@ const searchForm = new Form({
         if (results.totalResults === 0) {
           newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.notFound });
         } else {
-          const newsCards = results.articles.map((result) => new NewsCard({
-            element: CARD,
-            selectors: CARD_SELECTORS,
-            content: result,
-            dateFormatter,
-          }).create());
+          const newsCards = results.articles.map((result) => {
+            const { isLoggedIn } = user.getStatus();
+            console.log('isLoggedIn', isLoggedIn)
+
+            const card = new NewsCard({
+              selector: CARD_CONFIG.cardTemplate,
+              config: CARD_CONFIG,
+              content: result,
+              dateFormatter,
+              iconClickHandler: (event) => {
+                event.preventDefault();
+
+                if (isLoggedIn) {
+                  mainApi.createArticle({
+                    article: {
+                      title: result.title,
+                      text: result.description,
+                      date: result.publishedAt,
+                      source: result.source.name,
+                      link: result.url,
+                      image: result.urlToImage,
+                      keyword: info.search,
+                    },
+                    token: getToken(),
+                  })
+                    .then(() => {
+                      card.renderIcon({ isLoggedIn, marked: true });
+                    })
+                    .catch((error) => console.log(error));
+                } else {
+                  console.log('Необходима авторизация'); // TODO - сделать попап
+                }
+              },
+            });
+
+            card.renderIcon({ isLoggedIn, marked: false });
+
+            return card.create();
+          });
 
           newsCardsList.renderResults({ newsCards });
         }
@@ -149,28 +206,4 @@ const searchForm = new Form({
   },
 });
 
-mainApi.getUserData(getToken())
-  .then((userData) => {
-    console.log(userData.data);
-
-    header.render({
-      props: {
-        isLoggedIn: true,
-        userName: userData.data.name,
-      },
-    });
-
-    return [ header ];
-  })
-  .then(([ header ]) => {
-    console.log(header);
-  })
-  .catch((error) => {
-    console.log(error);
-
-    header.render({
-      props: {
-        isLoggedIn: false,
-      },
-    });
-  });
+renderLoggedUser(getToken());

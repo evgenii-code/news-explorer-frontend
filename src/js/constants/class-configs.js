@@ -39,3 +39,33 @@ export const FORM_CONFIG = {
   submitButton: '.button_type_colored',
   serverError: '.popup__error_align_center',
 };
+
+export const NEWS_CARDS_CONFIG = {
+  newsCardsTemplate: '.cards',
+  pending: '.cards__container_type_pending',
+  failed: '.cards__container_type_failed',
+  error: 'cards__container_type_error',
+  success: '.cards__container_type_success',
+  results: '.cards__results',
+  errorMessage: '.preloader__description_type_error',
+  showMoreButton: '.cards__button',
+  containerHidden: 'cards__container_hidden',
+  containerType: 'cards__container_type_',
+  showMoreButtonHidden: 'cards__button_hidden',
+};
+
+export const CARD_CONFIG = {
+  cardTemplate: '#card',
+  title: '.card__title',
+  address: '.card__address',
+  publishedAt: '.card__date',
+  description: '.card__description',
+  urlToImage: '.card__image',
+  iconContainer: '.card__icon-container',
+  iconContainerUnauth: 'card__icon-container_unauth',
+  icon: '.card__icon',
+  iconUnmarked: 'card__icon_type_unmarked',
+  iconMarked: 'card__icon_type_marked',
+  iconDelete: 'card__icon_type_delete',
+  keyword: 'card__keyword',
+};
