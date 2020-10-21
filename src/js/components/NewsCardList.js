@@ -2,35 +2,34 @@ export default class NewsCardList {
   // // Класс списка карточек новостей.
   // // Конструктор принимает массив карточек, которые должны быть в списке при первой отрисовке.
   constructor({
-    element, selectors, classes, newsCards,
+    selector, config, newsCards,
   }) {
-    this._element = element;
-    this._selectors = selectors;
-    this._classes = classes;
+    this._element = document.querySelector(selector);
+    this._config = config;
     this._newsCards = newsCards;
-    this._errorMessage = this._element.querySelector(this._selectors.errorMessage);
-    this._results = this._element.querySelector(this._selectors.results);
+    this._errorMessage = this._element.querySelector(this._config.errorMessage);
+    this._results = this._element.querySelector(this._config.results);
     this._showMore = this._showMore.bind(this);
-    this._showMoreButton = this._element.querySelector(this._selectors.showMoreButton);
+    this._showMoreButton = this._element.querySelector(this._config.showMoreButton);
   }
 
   _render({ type }) {
     this._element.children.forEach((container) => {
-      container.classList.add(this._classes.containerHidden);
+      container.classList.add(this._config.containerHidden);
 
-      if (container.classList.contains(`${this._classes.containerType}${type}`)) {
-        container.classList.remove(this._classes.containerHidden);
+      if (container.classList.contains(`${this._config.containerType}${type}`)) {
+        container.classList.remove(this._config.containerHidden);
       }
     });
   }
 
   _checkButtonDisplay() {
     if (this._newsCards.length <= 3 || this._newsCards.length === this._results.children.length) {
-      this._showMoreButton.classList.add(this._classes.showMoreButtonHidden);
+      this._showMoreButton.classList.add(this._config.showMoreButtonHidden);
 
       this._showMoreButton.removeEventListener('click', this._showMore);
     } else {
-      this._showMoreButton.classList.remove(this._classes.showMoreButtonHidden);
+      this._showMoreButton.classList.remove(this._config.showMoreButtonHidden);
 
       this._showMoreButton.addEventListener('click', this._showMore);
     }
