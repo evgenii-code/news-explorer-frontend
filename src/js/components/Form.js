@@ -30,8 +30,6 @@ export default class Form {
 
   setServerError(error) {
     // добавляет форме ошибку, пришедшую с сервера
-    console.log(error);
-
     this._serverError.textContent = error.message;
   }
 
@@ -75,11 +73,12 @@ export default class Form {
     }
   }
 
-  _clear() {
-    // вспомогательный метод, очищает поля формы;
+  clear() {
+    // очищает поля формы;
 
     this._serverError.textContent = '';
     this._element.reset();
+    this._validateForm();
   }
 
   _getInfo() {
@@ -95,7 +94,7 @@ export default class Form {
 
     this._submitHandler(this._getInfo());
 
-    this._clear();
+    this.clear();
   }
 
   _setListeners() {
