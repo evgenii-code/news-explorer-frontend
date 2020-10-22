@@ -8,6 +8,7 @@
 @import url('./__menu-list/header__menu-list.css');
 
 .header {
+  z-index: 1;
   min-height: 80px;
   display: flex;
 }
