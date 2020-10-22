@@ -57,10 +57,10 @@ export const NEWS_CARDS_CONFIG = {
 export const CARD_CONFIG = {
   cardTemplate: '#card',
   title: '.card__title',
-  address: '.card__address',
-  publishedAt: '.card__date',
-  description: '.card__description',
-  urlToImage: '.card__image',
+  source: '.card__address',
+  date: '.card__date',
+  text: '.card__description',
+  image: '.card__image',
   iconContainer: '.card__icon-container',
   iconContainerUnauth: 'card__icon-container_unauth',
   icon: '.card__icon',
@@ -68,4 +68,18 @@ export const CARD_CONFIG = {
   iconMarked: 'card__icon_type_marked',
   iconDelete: 'card__icon_type_delete',
   keyword: 'card__keyword',
+};
+
+export const INFO_CONFIG = {
+  infoTemplate: '.info',
+  title: '.info__title',
+  description: '.info__description',
+  descriptionStyle: 'info__description',
+  keywordsContainer: '.info__keywords',
+  keywordClass: 'info__keyword',
+  separator: ', ',
+  lastSeparator: ' и ',
+  thirdKeywordReplacer: ' другим',
+  userName: '.info__user-name',
+  articlesCounter: '.info__articles',
 };

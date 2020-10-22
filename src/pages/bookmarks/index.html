@@ -34,7 +34,7 @@
           <li class="menu__item">
             <a href="../" class="link menu__link menu__link_theme_dark">Главная</a>
           </li>
-          <li class="menu__item">
+          <li id="logged-only-link" class="menu__item">
             <a href="../bookmarks/" class="link menu__link menu__link_active menu__link_theme_dark">Сохранённые статьи</a>
           </li>
           <li class="menu__item">
@@ -50,16 +50,17 @@
       <div class="container info__container">
         <h2 class="info__name">Сохранённые статьи</h2>
 
-        <h3 class="font font_family_roboto-slab title info__title">Грета, у вас 5 сохранённых статей</h3>
+        <h3 class="font font_family_roboto-slab title info__title"><span class="info__user-name"></span>, у вас <span class="info__articles"></span> сохранённых статей</h3>
 
-        <p class="description info__description">По ключевым словам: <b class="info__description info__description_style_bold">Природа</b>, <b class="info__description info__description_style_bold">Тайга</b> и <b class="info__description info__description_style_bold">2 другим</b></p>
+        <p class="description info__description">По ключевым словам:
+          <span class="info__keywords"></span>
       </div>
     </section>
 
     <section class="font font_color_dark cards main__cards">
       <div class="container cards__container">
         <div class="cards__results">
-          <article class="card cards__card">
+          <!-- <article class="card cards__card">
             <p class="card__keyword">Природа</p>
 
             <div class="card__icon-container">
@@ -126,7 +127,7 @@
               <p class="card__description">Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где...</p>
               <address class="font font_family_roboto-slab card__address">Медиазона</address>
             </div>
-          </article>
+          </article> -->
         </div>
       </div>
     </section>
@@ -177,6 +178,28 @@
       </ul>
     </div>
   </footer>
+
+  <template id="card">
+    <article class="card cards__card">
+      <div class="card__icon-container">
+        <div class="card__icon"></div>
+      </div>
+
+      <picture>
+        <img
+          src=""
+          alt="Фотография к новости"
+          class="card__image">
+      </picture>
+
+      <div class="card__container">
+        <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
+        <h3 class="font font_family_roboto-slab card__title">Национальное достояние – парки</h3>
+        <p class="card__description">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.</p>
+        <address class="font font_family_roboto-slab card__address">Лента.ру</address>
+      </div>
+    </article>
+  </template>
 
   <script src="<%= htmlWebpackPlugin.files.js %>"></script>
 </body>
