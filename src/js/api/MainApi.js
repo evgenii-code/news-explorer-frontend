@@ -20,6 +20,10 @@ export default class MainApi {
       });
   }
 
+  getAppInfo(token) {
+    return Promise.all([this.getArticles(token), this.getUserData(token)]);
+  }
+
   signup(user) {
     // регистрирует нового пользователя;
     const url = this.baseUrl + this.paths.signup;
@@ -111,7 +115,7 @@ export default class MainApi {
 
   removeArticle({ cardId, token }) {
     // удаляет статью.
-    const url = this.baseUrl + this.paths.articles + cardId;
+    const url = `${this.baseUrl + this.paths.articles}/${cardId}`;
     const options = {
       method: 'DELETE',
       headers: {
