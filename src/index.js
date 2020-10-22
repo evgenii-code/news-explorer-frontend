@@ -150,35 +150,36 @@ const searchForm = new Form({
     newsCardsList.renderLoader();
 
     newsApi.getNews({ query: info.search })
-      .then((results) => {
-        console.log(results);
+      .then((articlesData) => {
+        console.log(articlesData);
 
-        if (results.totalResults === 0) {
+        if (articlesData.totalResults === 0) {
           newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.notFound });
         } else {
-          const newsCards = results.articles.map((result) => {
+          const newsCards = articlesData.articles.map((article) => {
             const { isLoggedIn } = user.getStatus();
-            console.log('isLoggedIn', isLoggedIn)
+
+            const content = {
+              title: article.title,
+              text: article.description,
+              date: article.publishedAt,
+              source: article.source.name,
+              link: article.url,
+              image: article.urlToImage,
+              keyword: info.search,
+            };
 
             const card = new NewsCard({
               selector: CARD_CONFIG.cardTemplate,
               config: CARD_CONFIG,
-              content: result,
+              content,
               dateFormatter,
               iconClickHandler: (event) => {
                 event.preventDefault();
 
                 if (isLoggedIn) {
                   mainApi.createArticle({
-                    article: {
-                      title: result.title,
-                      text: result.description,
-                      date: result.publishedAt,
-                      source: result.source.name,
-                      link: result.url,
-                      image: result.urlToImage,
-                      keyword: info.search,
-                    },
+                    article: content,
                     token: getToken(),
                   })
                     .then(() => {
