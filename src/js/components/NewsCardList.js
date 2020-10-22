@@ -6,11 +6,15 @@ export default class NewsCardList {
   }) {
     this._element = document.querySelector(selector);
     this._config = config;
-    this._newsCards = newsCards;
+    this._newsCards = newsCards || [];
     this._errorMessage = this._element.querySelector(this._config.errorMessage);
     this._results = this._element.querySelector(this._config.results);
     this._showMore = this._showMore.bind(this);
     this._showMoreButton = this._element.querySelector(this._config.showMoreButton);
+
+    if (this._newsCards.length !== 0) {
+      this.renderResults({ newsCards: this._newsCards });
+    }
   }
 
   _render({ type }) {
