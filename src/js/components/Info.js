@@ -7,6 +7,7 @@ export default class Info {
     this._userNameField = this._element.querySelector(this._config.userName);
     this._userNameField.textContent = userName;
     this._articlesCounter = this._element.querySelector(this._config.articlesCounter);
+    this._articlesText = this._element.querySelector(this._config.articlesText);
     this._title = this._element.querySelector(this._config.title);
     this._description = this._element.querySelector(this._config.description);
     this._keywordsContainer = this._element.querySelector(this._config.keywordsContainer);
@@ -69,7 +70,12 @@ export default class Info {
   _defineKeywordsToShow() {
     const sortedKeywords = this._getSortedKeywords();
 
-    if (sortedKeywords.length <= 3) {
+    this._description.classList.remove(this._config.descriptionHiddenStyle);
+
+    if (sortedKeywords.length === 0) {
+      this._description.classList.add(this._config.descriptionHiddenStyle);
+      this._keywordElements = [];
+    } else if (sortedKeywords.length <= 3) {
       this._keywordElements = sortedKeywords
         .map((item) => this._createKeywordElement(item.keyword));
     } else {
@@ -78,20 +84,27 @@ export default class Info {
         .map((item) => this._createKeywordElement(item.keyword));
 
       this._keywordElements
-        .push(this._createKeywordElement(`${sortedKeywords.length - 2} ${this._config.thirdKeywordReplacer}`));
+        .push(this._createKeywordElement(`${sortedKeywords.length - 2} ${this._config.etCetera}`));
     }
 
     this._keywordElements = this._includeSeparation();
   }
 
+  _defineDeclensions(number) {
+    const n = Math.abs(number) % 100;
+    const n1 = number % 10;
+    if (n > 10 && n < 20) { return this._config.articlesMessage.multi; }
+    if (n1 > 1 && n1 < 5) { return this._config.articlesMessage.double; }
+    if (n1 === 1) { return this._config.articlesMessage.single; }
+    return this._config.articlesMessage.multi;
+  }
+
   render(articles) {
-    this._articlesCounter.textContent = articles.length;
-
-    this._keywordsContainer.innerHTML = '';
     this._articles = articles;
-
+    this._articlesCounter.textContent = articles.length;
+    this._articlesText.textContent = this._defineDeclensions(articles.length);
+    this._keywordsContainer.innerHTML = '';
     this._defineKeywordsToShow();
-
     this._keywordsContainer.append(...this._keywordElements);
   }
 }
