@@ -31,7 +31,8 @@ export default class NewsCard {
     this._date.textContent = this._dateFormatter(this._content.date);
     this._date.setAttribute('datetime', this._content.date.slice(0, 10));
     this._text.textContent = this._content.text;
-    this._image.src = this._content.image;
+    if (this._content.image) this._image.src = this._content.image;
+    this._image.alt = this._content.title;
 
     if (this._cardId) this._addKeyword();
 
