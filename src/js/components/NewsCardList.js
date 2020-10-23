@@ -28,6 +28,7 @@ export default class NewsCardList {
   }
 
   _checkButtonDisplay() {
+    // проверяет необходимо ли отрисовывать кнопку
     if (this._newsCards.length <= 3 || this._newsCards.length === this._results.children.length) {
       this._showMoreButton.classList.add(this._config.showMoreButtonHidden);
 
@@ -39,16 +40,23 @@ export default class NewsCardList {
     }
   }
 
-  renderResults({ newsCards }) {
+  renderResults({ newsCards, limitResults }) {
     // принимает массив экземпляров карточек и отрисовывает их;
     this._results.innerHTML = '';
     this._newsCards = newsCards;
 
-    this._newsCards.slice(0, 3).forEach((newsCard) => {
+    let newsCardsToRender = this._newsCards;
+
+    if (limitResults) {
+      newsCardsToRender = newsCardsToRender.slice(0, 3);
+
+      this._checkButtonDisplay();
+    }
+
+    newsCardsToRender.forEach((newsCard) => {
       this.addCard({ newsCard });
     });
 
-    this._checkButtonDisplay();
     this._render({ type: 'success' });
   }
 
