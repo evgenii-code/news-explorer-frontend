@@ -1,15 +1,17 @@
 export default class Popup {
   constructor({
-    selector, config, container, content,
+    selector, config, content, toggleMenu,
   }) {
-    this._element = document.querySelector(selector).content.cloneNode(true).firstElementChild;
     this._config = config;
+    this._parentContainer = document.querySelector(this._config.parentContainer);
+    this._element = this._parentContainer.querySelector(selector)
+      .content.cloneNode(true).firstElementChild;
     this._contentContainerElement = this._element.querySelector(this._config.container);
     this._content = content;
     this._closeButton = this._element.querySelector(this._config.closeButton);
     this._choiceButton = this._element.querySelector(this._config.choiceButton);
     this._title = this._element.querySelector(this._config.title);
-    this._container = container;
+    this._toggleMenu = toggleMenu;
     this._closeButtonClickHandler = this._closeButtonClickHandler.bind(this);
     this._choiceClickHandler = this._choiceClickHandler.bind(this);
     this._setHandlers();
@@ -30,10 +32,14 @@ export default class Popup {
   open() {
     this._setDefaultContent();
 
-    document.body.prepend(this._element);
+    this._toggleMenu();
+
+    this._parentContainer.append(this._element);
   }
 
   close() {
+    this._toggleMenu();
+
     this._element.remove();
   }
 
