@@ -1,6 +1,7 @@
-export const NEWS_CARDS_ERRORS = {
+export const NEWS_CARDS_MESSAGES = {
   notFound: 'К сожалению по вашему запросу ничего не найдено.',
   serverError: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.',
+  empty: 'Нет сохраненных статей',
 };
 
 export const FORM_ERRORS = {
