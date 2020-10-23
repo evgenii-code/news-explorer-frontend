@@ -19,4 +19,8 @@ export default class User {
       userName: this._userName,
     };
   }
+
+  getName() {
+    return this._userName;
+  }
 }
