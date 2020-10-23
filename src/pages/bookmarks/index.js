@@ -9,15 +9,19 @@ import {
   INFO_CONFIG,
 } from '../../js/constants/class-configs';
 
-// import {
-//   NEWS_CARDS_ERRORS,
-//   FORM_ERRORS,
-// } from '../../js/constants/error-messages';
+import {
+  NEWS_CARDS_MESSAGES,
+  // FORM_ERRORS,
+} from '../../js/constants/text-messages';
 
 import {
   MAIN_API_OPTIONS,
 } from '../../js/constants/api-config';
 
+import {
+  getToken,
+  // deleteToken,
+} from '../../js/utils/local-storage-utils';
 import dateFormatter from '../../js/utils/date-formatter';
 import MainApi from '../../js/api/MainApi';
 import User from '../../js/components/User';
@@ -27,10 +31,6 @@ import Header from '../../js/components/Header';
 import NewsCardsList from '../../js/components/NewsCardList';
 import NewsCard from '../../js/components/NewsCard';
 import Info from '../../js/components/Info';
-
-function getToken() {
-  return localStorage.getItem('jwt');
-}
 
 const user = new User();
 const mainApi = new MainApi({ options: MAIN_API_OPTIONS });
@@ -48,9 +48,17 @@ const header = new Header({
     localStorage.removeItem('jwt');
     user.loggedOut();
 
-    location.replace('/');
+    window.location.replace('/');
   },
 });
+
+const newsCardsList = new NewsCardsList({
+  selector: NEWS_CARDS_CONFIG.newsCardsTemplate,
+  config: NEWS_CARDS_CONFIG,
+  newsCards: [],
+});
+
+newsCardsList.renderLoader();
 
 mainApi.getAppInfo(getToken())
   .then(([articlesData, userData]) => {
@@ -58,53 +66,58 @@ mainApi.getAppInfo(getToken())
 
     user.loggedIn(userData.data.name);
 
-    header.render({
-      props: user.getStatus(),
-    });
-
     const info = new Info({
       selector: INFO_CONFIG.infoTemplate,
       config: INFO_CONFIG,
       articles,
-      userName: user.getStatus().userName,
+      userName: user.getName(),
     });
 
-    const cardsArray = articles.map((article) => {
-      const card = new NewsCard({
-        selector: CARD_CONFIG.cardTemplate,
-        config: CARD_CONFIG,
-        content: article,
-        dateFormatter,
-        iconClickHandler: (event) => {
-          event.preventDefault();
+    header.render({
+      props: user.getStatus(),
+    });
 
-          const cardId = card.id();
+    if (articles.length === 0) {
+      newsCardsList.renderError({ message: NEWS_CARDS_MESSAGES.empty });
+    } else {
+      const newsCards = articles.map((article) => {
+        const card = new NewsCard({
+          selector: CARD_CONFIG.cardTemplate,
+          config: CARD_CONFIG,
+          content: article,
+          dateFormatter,
+          iconClickHandler: (event) => {
+            event.preventDefault();
 
-          mainApi.removeArticle({ cardId, token: getToken() })
-            .then(() => {
-              articles = articles.filter((item) => item._id !== card.id());
+            const cardId = card.id();
 
-              card.delete();
-              info.render(articles);
-            })
-            .catch((error) => console.log(`При удалении карточки: ${error}`));
-        },
+            mainApi.removeArticle({ cardId, token: getToken() })
+              .then(() => {
+                articles = articles.filter((item) => item._id !== card.id());
+
+                card.delete();
+                info.render(articles);
+
+                if (articles.length === 0) {
+                  newsCardsList.renderError({ message: NEWS_CARDS_MESSAGES.empty });
+                }
+              })
+              .catch((error) => console.log(`При удалении карточки: ${error}`));
+          },
+        });
+
+        card.renderIcon({ saved: true });
+
+        return card.create();
       });
 
-      card.renderIcon({ saved: true });
-
-      return card.create();
-    });
-
-    const newsCardsList = new NewsCardsList({
-      selector: NEWS_CARDS_CONFIG.newsCardsTemplate,
-      config: NEWS_CARDS_CONFIG,
-      newsCards: cardsArray,
-    });
+      newsCardsList.renderResults({ newsCards, limitResults: false });
+    }
   })
   .catch((error) => {
-    console.log('error', error);
-    // localStorage.removeItem('jwt');
+    console.log('error', error)
+    // console.log(`При авторизации: ${error}`);
+    // deleteToken();
     // user.loggedOut();
-    // location.replace('/');
+    // window.location.replace('/');
   });

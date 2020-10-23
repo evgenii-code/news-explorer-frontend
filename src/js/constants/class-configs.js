@@ -1,4 +1,5 @@
 export const POPUP_CONFIG = {
+  parentContainer: '.body',
   popupTemplate: '#popup-template',
   signupPopupTemplate: '#signup-popup',
   signinPopupTemplate: '#signin-popup',
@@ -15,7 +16,8 @@ export const POPUP_CONFIG = {
 };
 
 export const HEADER_CONFIG = {
-  headerTemplate: '.header',
+  parentContainer: '.body',
+  headerTemplate: '#header',
   positionOverlaid: 'body__header_position_overlaid',
   positionNormal: 'body__header_position_normal',
   menuHamburger: '.menu__hamburger',
@@ -29,6 +31,9 @@ export const HEADER_CONFIG = {
   buttonText: 'Авторизоваться',
   menuItemHidden: 'menu__item_hidden',
   loggedOnlyLink: '#logged-only-link',
+  menuCheckboxSelector: '.menu__checkbox',
+  menuSelector: '.header__menu',
+  menuHiddenClass: 'header__menu_hidden',
 };
 
 export const FORM_CONFIG = {
@@ -37,7 +42,7 @@ export const FORM_CONFIG = {
   successTemplate: '#success-template',
   searchTemplate: '.search__field',
   submitButton: '.button_type_colored',
-  serverError: '.popup__error_align_center',
+  serverError: '.error_type_server',
 };
 
 export const NEWS_CARDS_CONFIG = {
@@ -74,12 +79,18 @@ export const INFO_CONFIG = {
   infoTemplate: '.info',
   title: '.info__title',
   description: '.info__description',
-  descriptionStyle: 'info__description',
+  descriptionHiddenStyle: 'info__description_hidden',
   keywordsContainer: '.info__keywords',
   keywordClass: 'info__keyword',
   separator: ', ',
   lastSeparator: ' и ',
-  thirdKeywordReplacer: ' другим',
+  etCetera: ' другим',
   userName: '.info__user-name',
   articlesCounter: '.info__articles',
+  articlesText: '.info__saved-articles',
+  articlesMessage: {
+    single: ' сохраненная статья',
+    double: ' сохраненные статьи',
+    multi: ' сохраненных статей',
+  },
 };

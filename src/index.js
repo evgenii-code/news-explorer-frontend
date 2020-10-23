@@ -9,14 +9,19 @@ import {
 } from './js/constants/class-configs';
 
 import {
-  NEWS_CARDS_ERRORS,
+  NEWS_CARDS_MESSAGES,
   FORM_ERRORS,
-} from './js/constants/error-messages';
+} from './js/constants/text-messages';
 
 import {
   NEWS_API_OPTIONS,
   MAIN_API_OPTIONS,
 } from './js/constants/api-config';
+
+import {
+  getToken,
+  saveToken,
+} from './js/utils/local-storage-utils';
 
 import dateFormatter from './js/utils/date-formatter';
 import MainApi from './js/api/MainApi';
@@ -27,14 +32,6 @@ import Popup from './js/components/Popup';
 import Form from './js/components/Form';
 import NewsCardsList from './js/components/NewsCardList';
 import NewsCard from './js/components/NewsCard';
-
-function getToken() {
-  return localStorage.getItem('jwt');
-}
-
-function saveToken(token) {
-  localStorage.setItem('jwt', token);
-}
 
 const user = new User();
 const mainApi = new MainApi({ options: MAIN_API_OPTIONS });
@@ -100,16 +97,6 @@ const signupForm = new Form({
   },
 });
 
-const popup = new Popup({
-  selector: POPUP_CONFIG.popupTemplate,
-  config: POPUP_CONFIG,
-  content: {
-    signinElement: signinForm.node(), // получаю элемент формы
-    signupElement: signupForm.node(),
-    // success: successForm.node(),
-  },
-});
-
 const header = new Header({
   selector: HEADER_CONFIG.headerTemplate,
   config: HEADER_CONFIG,
@@ -117,10 +104,6 @@ const header = new Header({
     theme: 'light',
     overlaid: true,
   },
-  openPopupMethod: popup.open,
-  // logoutMethod() {
-  //   localStorage.removeItem('jwt');
-  // },
   logoutMethod: (event) => {
     event.preventDefault(event);
 
@@ -129,10 +112,22 @@ const header = new Header({
 
       user.loggedOut();
 
-      return header.render({ props: user.getStatus() });
+      header.render({ props: user.getStatus() });
+      return;
     }
 
-    return popup.open();
+    popup.open();
+  },
+});
+
+const popup = new Popup({
+  selector: POPUP_CONFIG.popupTemplate,
+  config: POPUP_CONFIG,
+  toggleMenu: header.toggleMenu,
+  content: {
+    signinElement: signinForm.node(), // получаю элемент формы
+    signupElement: signupForm.node(),
+    // success: successForm.node(),
   },
 });
 
@@ -154,7 +149,7 @@ const searchForm = new Form({
         console.log(articlesData);
 
         if (articlesData.totalResults === 0) {
-          newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.notFound });
+          newsCardsList.renderError({ message: NEWS_CARDS_MESSAGES.notFound });
         } else {
           const newsCards = articlesData.articles.map((article) => {
             const { isLoggedIn } = user.getStatus();
@@ -197,12 +192,12 @@ const searchForm = new Form({
             return card.create();
           });
 
-          newsCardsList.renderResults({ newsCards });
+          newsCardsList.renderResults({ newsCards, limitResults: true });
         }
       })
       .catch((error) => {
         console.log('error', error);
-        newsCardsList.renderError({ message: NEWS_CARDS_ERRORS.serverError });
+        newsCardsList.renderError({ message: NEWS_CARDS_MESSAGES.serverError });
       });
   },
 });

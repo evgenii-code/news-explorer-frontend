@@ -18,39 +18,41 @@
   <title>NewsExplorer</title>
 </head>
 <body class="body font font_family_roboto">
-  <header class="font font_color_dark header header_theme_dark body__header body__header_position_normal">
-    <div class="container header__container">
-      <h1 class="font font_family_roboto-slab header__logo">NewsExplorer</h1>
+  <template id="header">
+    <header class="font font_color_dark header header_theme_dark body__header body__header_position_normal">
+      <div class="container header__container">
+        <h1 class="font font_family_roboto-slab header__logo">NewsExplorer</h1>
 
-      <nav class="menu header__menu">
-        <input class="menu__checkbox" type="checkbox">
+        <nav class="menu header__menu">
+          <input class="menu__checkbox" type="checkbox">
 
-        <div class="menu__hamburger menu__hamburger_theme_dark" tabindex="0"></div>
+          <div class="menu__hamburger menu__hamburger_theme_dark" tabindex="0"></div>
 
-        <ul class="menu__list header__menu-list">
-          <li class="menu__item">
-            <a href="../" class="font font_family_roboto-slab menu__logo">NewsExplorer</a>
-          </li>
-          <li class="menu__item">
-            <a href="../" class="link menu__link menu__link_theme_dark">Главная</a>
-          </li>
-          <li id="logged-only-link" class="menu__item">
-            <a href="../bookmarks/" class="link menu__link menu__link_active menu__link_theme_dark">Сохранённые статьи</a>
-          </li>
-          <li class="menu__item">
-            <button class="button button_type_dark button_type_transparent button_logout_dark menu__button">Грета</button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+          <ul class="menu__list header__menu-list">
+            <li class="menu__item">
+              <a href="../" class="font font_family_roboto-slab menu__logo">NewsExplorer</a>
+            </li>
+            <li class="menu__item">
+              <a href="../" class="link menu__link menu__link_theme_dark">Главная</a>
+            </li>
+            <li id="logged-only-link" class="menu__item">
+              <a href="../bookmarks/" class="link menu__link menu__link_active menu__link_theme_dark">Сохранённые статьи</a>
+            </li>
+            <li class="menu__item">
+              <button class="button button_type_dark button_type_transparent button_logout_dark menu__button"></button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  </template>
 
   <main class="main body__main">
     <section class="font font_color_dark info main__info">
       <div class="container info__container">
         <h2 class="info__name">Сохранённые статьи</h2>
 
-        <h3 class="font font_family_roboto-slab title info__title"><span class="info__user-name"></span>, у вас <span class="info__articles"></span> сохранённых статей</h3>
+        <h3 class="font font_family_roboto-slab title info__title"><span class="info__user-name"></span>, у вас <span class="info__articles"></span><span class="info__saved-articles"></span></h3>
 
         <p class="description info__description">По ключевым словам:
           <span class="info__keywords"></span>
@@ -58,77 +60,18 @@
     </section>
 
     <section class="font font_color_dark cards main__cards">
-      <div class="container cards__container">
-        <div class="cards__results">
-          <!-- <article class="card cards__card">
-            <p class="card__keyword">Природа</p>
+      <div class="preloader cards__container cards__container_type_pending cards__container_hidden">
+        <div class="preloader__image preloader__image_type_pending"></div>
+        <p class="preloader__description">Идет поиск новостей...</p>
+      </div>
 
-            <div class="card__icon-container">
-              <div class="card__icon card__icon_type_unmarked"></div>
-            </div>
+      <div class="preloader cards__container cards__container_type_error cards__container_hidden">
+        <div class="preloader__image preloader__image_type_failed"></div>
+        <p class="preloader__description preloader__description_type_error">Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.</p>
+      </div>
 
-            <picture>
-              <source srcset="../<%=require('../../assets/images/card.jpg')%>" media="(max-width: 480px)">
-              <img
-                src="../<%=require('../../assets/images/card.jpg')%>"
-                alt="Фотография к новости"
-                class="card__image">
-            </picture>
-
-            <div class="card__container">
-              <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
-              <h3 class="font font_family_roboto-slab card__title">Национальное достояние – парки</h3>
-              <p class="card__description">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.</p>
-              <address class="font font_family_roboto-slab card__address">Лента.ру</address>
-            </div>
-          </article>
-
-          <article class="card cards__card">
-            <p class="card__keyword">Природа</p>
-
-            <div class="card__icon-container">
-              <div class="card__icon card__icon_type_marked"></div>
-            </div>
-
-            <picture>
-              <source srcset="../<%=require('../../assets/images/card.jpg')%>" media="(max-width: 480px)">
-              <img
-                src="../<%=require('../../assets/images/card.jpg')%>"
-                alt="Фотография к новости"
-                class="card__image">
-            </picture>
-
-            <div class="card__container">
-              <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
-              <h3 class="font font_family_roboto-slab card__title ">Лесные огоньки: история одной фотографии</h3>
-              <p class="card__description">Фотограф отвлеклась от освещения суровой политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного из местных чудес природы.</p>
-              <address class="font font_family_roboto-slab card__address">Афиша</address>
-            </div>
-          </article>
-
-          <article class="card cards__card">
-            <p class="card__keyword">Природа</p>
-
-            <div class="card__icon-container">
-              <div class="card__icon card__icon_type_unmarked "></div>
-            </div>
-
-            <picture>
-              <source srcset="../<%=require('../../assets/images/card.jpg')%>" media="(max-width: 480px)">
-              <img
-                src="../<%=require('../../assets/images/card.jpg')%>"
-                alt="Фотография к новости"
-                class="card__image">
-            </picture>
-
-            <div class="card__container">
-              <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
-              <h3 class="font font_family_roboto-slab card__title">«Первозданная тайга»: новый фотопроект Игоря Шпиленка</h3>
-              <p class="card__description">Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где...</p>
-              <address class="font font_family_roboto-slab card__address">Медиазона</address>
-            </div>
-          </article> -->
-        </div>
+      <div class="container cards__container cards__container_type_success cards__container_hidden">
+        <div class="cards__results"></div>
       </div>
     </section>
   </main>
@@ -187,16 +130,16 @@
 
       <picture>
         <img
-          src=""
+          src="../<%=require('../../assets/ui/icons/image-not-found.svg')%>"
           alt="Фотография к новости"
           class="card__image">
       </picture>
 
       <div class="card__container">
-        <time class="font font_family_source card__date" datetime="2019-08-02">2 августа, 2019</time>
-        <h3 class="font font_family_roboto-slab card__title">Национальное достояние – парки</h3>
-        <p class="card__description">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.</p>
-        <address class="font font_family_roboto-slab card__address">Лента.ру</address>
+        <time class="font font_family_source card__date" datetime=""></time>
+        <h3 class="font font_family_roboto-slab card__title"></h3>
+        <p class="card__description"></p>
+        <address class="font font_family_roboto-slab card__address"></address>
       </div>
     </article>
   </template>
