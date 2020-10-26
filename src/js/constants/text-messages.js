@@ -7,6 +7,7 @@ export const NEWS_CARDS_MESSAGES = {
 export const FORM_ERRORS = {
   valueMissing: 'Это обязательное поле',
   tooShort: 'Должно быть от 2 до 30 символов',
-  typeMismatch: 'Неправильный формат email',
+  emailMismatch: 'Неправильный формат email',
+  patternMismatch: 'Не должно начинаться и заканчиваться пробелами',
   conflict: 'Такой пользователь уже есть',
 };

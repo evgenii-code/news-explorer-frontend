@@ -8,11 +8,8 @@ export const POPUP_CONFIG = {
   closeButton: '.popup__close',
   choiceButton: '.popup__choice',
   form: '.popup__form',
-  title: '.popup__title',
-  signinTitle: 'Вход',
-  signinChoiceText: 'Зарегистрироваться',
-  signupTitle: 'Регистрация',
-  signupChoiceText: 'Войти',
+  backgroundClass: 'body__popup',
+  closeButtonClass: 'popup__close',
 };
 
 export const HEADER_CONFIG = {
@@ -39,10 +36,16 @@ export const HEADER_CONFIG = {
 export const FORM_CONFIG = {
   signinTemplate: '#signin-template',
   signupTemplate: '#signup-template',
-  successTemplate: '#success-template',
   searchTemplate: '.search__field',
   submitButton: '.button_type_colored',
   serverError: '.error_type_server',
+  choiceButton: '.popup__choice',
+};
+
+export const POPUP_MESSAGE_CONFIG = {
+  successTemplate: '#message-template',
+  messageElement: '.popup__message',
+  choiceButton: '.popup__choice',
 };
 
 export const NEWS_CARDS_CONFIG = {
