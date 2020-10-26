@@ -20,7 +20,7 @@ import {
 
 import {
   getToken,
-  // deleteToken,
+  deleteToken,
 } from '../../js/utils/local-storage-utils';
 import dateFormatter from '../../js/utils/date-formatter';
 import MainApi from '../../js/api/MainApi';
@@ -115,9 +115,8 @@ mainApi.getAppInfo(getToken())
     }
   })
   .catch((error) => {
-    console.log('error', error)
-    // console.log(`При авторизации: ${error}`);
-    // deleteToken();
-    // user.loggedOut();
-    // window.location.replace('/');
+    console.log(`Ошибка при авторизации: ${error}`);
+    deleteToken();
+    user.loggedOut();
+    window.location.replace('/');
   });

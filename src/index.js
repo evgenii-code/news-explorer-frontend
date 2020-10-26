@@ -4,6 +4,7 @@ import {
   POPUP_CONFIG,
   HEADER_CONFIG,
   FORM_CONFIG,
+  POPUP_MESSAGE_CONFIG,
   NEWS_CARDS_CONFIG,
   CARD_CONFIG,
 } from './js/constants/class-configs';
@@ -21,6 +22,7 @@ import {
 import {
   getToken,
   saveToken,
+  deleteToken,
 } from './js/utils/local-storage-utils';
 
 import dateFormatter from './js/utils/date-formatter';
@@ -30,6 +32,8 @@ import User from './js/components/User';
 import Header from './js/components/Header';
 import Popup from './js/components/Popup';
 import Form from './js/components/Form';
+import PopupForm from './js/components/PopupForm';
+import PopupMessage from './js/components/PopupMessage';
 import NewsCardsList from './js/components/NewsCardList';
 import NewsCard from './js/components/NewsCard';
 
@@ -53,50 +57,6 @@ const renderLoggedUser = (token) => mainApi.getUserData(token)
     });
   });
 
-const signinForm = new Form({
-  selector: FORM_CONFIG.signinTemplate,
-  errorMessages: FORM_ERRORS,
-  config: FORM_CONFIG,
-  submitHandler(info) {
-    mainApi.signin(info)
-      .then((res) => {
-        saveToken(res.token);
-
-        renderLoggedUser(res.token)
-          .then(() => {
-            popup.close();
-          });
-      })
-      .catch((error) => {
-        // TODO - отрефакторить
-        error.then((data) => {
-          signinForm.setServerError(data);
-        });
-      });
-  },
-});
-
-const signupForm = new Form({
-  selector: FORM_CONFIG.signupTemplate,
-  errorMessages: FORM_ERRORS,
-  config: FORM_CONFIG,
-  submitHandler: (info) => {
-    mainApi.signup(info)
-      .then((res) => {
-        console.log(res);
-
-        popup.clearContent();
-        popup.setContent('Успешно!'); // TODO - Вставить правильный контент
-      })
-      .catch((error) => {
-        // TODO - отрефакторить
-        error.then((data) => {
-          signupForm.setServerError(data);
-        });
-      });
-  },
-});
-
 const header = new Header({
   selector: HEADER_CONFIG.headerTemplate,
   config: HEADER_CONFIG,
@@ -108,7 +68,7 @@ const header = new Header({
     event.preventDefault(event);
 
     if (user.getStatus().isLoggedIn) {
-      localStorage.removeItem('jwt');
+      deleteToken();
 
       user.loggedOut();
 
@@ -116,6 +76,8 @@ const header = new Header({
       return;
     }
 
+    popup.clearContent();
+    popup.setContent(signinForm.node());
     popup.open();
   },
 });
@@ -124,10 +86,65 @@ const popup = new Popup({
   selector: POPUP_CONFIG.popupTemplate,
   config: POPUP_CONFIG,
   toggleMenu: header.toggleMenu,
-  content: {
-    signinElement: signinForm.node(), // получаю элемент формы
-    signupElement: signupForm.node(),
-    // success: successForm.node(),
+});
+
+const signinForm = new PopupForm({
+  selector: FORM_CONFIG.signinTemplate,
+  errorMessages: FORM_ERRORS,
+  config: FORM_CONFIG,
+  submitHandler: (info) => {
+    mainApi.signin(info)
+      .then((res) => {
+        saveToken(res.token);
+
+        return renderLoggedUser(res.token);
+      })
+      .then(() => {
+        signinForm.clear();
+        popup.close();
+      })
+      .catch((error) => error.then((data) => signinForm.setServerError(data)))
+      .catch((error) => console.log(`Ошибка ${error}`));
+  },
+  choiceClickHandler: (event) => {
+    event.preventDefault();
+
+    signinForm.clear();
+    popup.clearContent();
+    popup.setContent(signupForm.node());
+  },
+});
+
+const popupSuccess = new PopupMessage({
+  selector: POPUP_MESSAGE_CONFIG.successTemplate,
+  config: POPUP_MESSAGE_CONFIG,
+  choiceClickHandler: (event) => {
+    event.preventDefault();
+
+    popup.clearContent();
+    popup.setContent(signinForm.node());
+  },
+});
+
+const signupForm = new PopupForm({
+  selector: FORM_CONFIG.signupTemplate,
+  errorMessages: FORM_ERRORS,
+  config: FORM_CONFIG,
+  submitHandler: (info) => {
+    mainApi.signup(info)
+      .then(() => {
+        popup.clearContent();
+        popup.setContent(popupSuccess.node());
+      })
+      .catch((error) => error.then((data) => signupForm.setServerError(data)))
+      .catch((error) => console.log(`Ошибка ${error}`));
+  },
+  choiceClickHandler: (event) => {
+    event.preventDefault();
+
+    signupForm.clear();
+    popup.clearContent();
+    popup.setContent(signinForm.node());
   },
 });
 
@@ -141,65 +158,74 @@ const searchForm = new Form({
   selector: FORM_CONFIG.searchTemplate,
   errorMessages: FORM_ERRORS,
   config: FORM_CONFIG,
-  submitHandler(info) {
+  submitHandler: (info) => {
     newsCardsList.renderLoader();
 
     newsApi.getNews({ query: info.search })
       .then((articlesData) => {
-        console.log(articlesData);
-
         if (articlesData.totalResults === 0) {
           newsCardsList.renderError({ message: NEWS_CARDS_MESSAGES.notFound });
-        } else {
-          const newsCards = articlesData.articles.map((article) => {
-            const { isLoggedIn } = user.getStatus();
+          return;
+        }
 
-            const content = {
-              title: article.title,
-              text: article.description,
-              date: article.publishedAt,
-              source: article.source.name,
-              link: article.url,
-              image: article.urlToImage,
-              keyword: info.search,
-            };
+        const newsCards = articlesData.articles.map((article) => {
+          const content = {
+            title: article.title,
+            text: article.description,
+            date: article.publishedAt,
+            source: article.source.name,
+            link: article.url,
+            image: article.urlToImage,
+            keyword: info.search,
+          };
 
-            const card = new NewsCard({
-              selector: CARD_CONFIG.cardTemplate,
-              config: CARD_CONFIG,
-              content,
-              dateFormatter,
-              iconClickHandler: (event) => {
-                event.preventDefault();
+          const card = new NewsCard({
+            selector: CARD_CONFIG.cardTemplate,
+            config: CARD_CONFIG,
+            content,
+            dateFormatter,
+            iconClickHandler: (event) => {
+              event.preventDefault();
 
-                if (isLoggedIn) {
-                  mainApi.createArticle({
-                    article: content,
+              if (user.isLoggedIn()) {
+                const cardId = card.id();
+
+                const apiRoute = cardId
+                  ? mainApi.removeArticle({
+                    cardId,
                     token: getToken(),
                   })
-                    .then(() => {
-                      card.renderIcon({ isLoggedIn, marked: true });
-                    })
-                    .catch((error) => console.log(error));
-                } else {
-                  console.log('Необходима авторизация'); // TODO - сделать попап
-                }
-              },
-            });
+                  : mainApi.createArticle({
+                    article: content,
+                    token: getToken(),
+                  });
 
-            card.renderIcon({ isLoggedIn, marked: false });
-
-            return card.create();
+                apiRoute
+                  .then((cardData) => {
+                    card.setId(cardData.data._id);
+                    card.renderIcon({ isLoggedIn: user.isLoggedIn() });
+                  })
+                  .catch((error) => console.log(`Ошибка при сохранении/удалении статьи ${error}`));
+              }
+            },
           });
 
-          newsCardsList.renderResults({ newsCards, limitResults: true });
-        }
+          card.renderIcon({ isLoggedIn: user.isLoggedIn() });
+
+          return card.create();
+        });
+
+        newsCardsList.renderResults({ newsCards, limitResults: true });
       })
       .catch((error) => {
-        console.log('error', error);
+        console.log(`Ошибка при получении статей ${error}`);
         newsCardsList.renderError({ message: NEWS_CARDS_MESSAGES.serverError });
       });
   },
 });
+
+searchForm.setListeners();
+signinForm.setListeners();
+signupForm.setListeners();
 
 renderLoggedUser(getToken());
