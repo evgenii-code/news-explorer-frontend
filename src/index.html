@@ -23,22 +23,25 @@
       <div class="popup__content">
         <img src="<%=require('./assets/ui/icons/close-light.svg')%>" alt="Закрыть попап" class="popup__close">
 
-        <h2 class="popup__title font font_family_roboto">Вход</h2>
+        <!-- <h2 class="popup__title font font_family_roboto">Вход</h2> -->
 
         <div class="popup__container"></div>
 
-        <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Зарегистрироваться</button></p>
+        <!-- <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Зарегистрироваться</button></p> -->
       </div>
     </div>
   </template>
 
   <template id="signin-template">
     <form class="popup__form font font_family_inter" name="signin" data-content-type="signin">
+      <h2 class="popup__title font font_family_roboto">Вход</h2>
+
       <label class="popup__label">Email
         <input
               id="email-input"
               type="email"
               name="email"
+              pattern="^([0-9a-zA-Z]+-?\.?)+@([0-9a-zA-Z]+-?\.?)+\.[a-zA-Z]{2,}$"
               class="popup__input popup__input_type_email"
               placeholder="Введите почту"
               minlength="2"
@@ -52,6 +55,7 @@
               id="password-input"
               type="password"
               name="password"
+              pattern="[^\s]+.*[^\s]+"
               class="popup__input popup__input_type_password"
               placeholder="Введите пароль"
               minlength="8"
@@ -62,16 +66,21 @@
       <p class="error error_type_server popup__error popup__error_align_center" aria-live="polite"></p>
 
       <button name="signinButton" class="button button_type_colored popup__button" disabled>Войти</button>
+
+      <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Зарегистрироваться</button></p>
     </form>
   </template>
 
   <template id="signup-template">
     <form class="popup__form font font_family_inter" name="signup" data-content-type="signup">
+      <h2 class="popup__title font font_family_roboto">Регистрация</h2>
+
       <label class="popup__label">Email
         <input
               id="email-input"
               type="email"
               name="email"
+              pattern="([0-9a-zA-Z]+-?\.?)+@([0-9a-zA-Z]+-?\.?)+\.[a-zA-Z]{2,}"
               class="popup__input popup__input_type_email"
               placeholder="Введите почту"
               minlength="2"
@@ -85,6 +94,7 @@
               id="password-input"
               type="password"
               name="password"
+              pattern="[^\s]+.*[^\s]+"
               class="popup__input popup__input_type_password"
               placeholder="Введите пароль"
               minlength="8"
@@ -97,6 +107,7 @@
               id="name-input"
               type="text"
               name="name"
+              pattern="[^\s]+.*[^\s]+"
               class="popup__input popup__input_type_name"
               placeholder="Введите свое имя"
               minlength="2"
@@ -108,14 +119,16 @@
       <p class="error error_type_server popup__error popup__error_align_center" aria-live="polite"></p>
 
       <button name="signinButton" class="button button_type_colored popup__button" disabled>Регистрация</button>
+
+      <p class="popup__text font font_family_inter">Или <button class="popup__choice popup__choice_display_inline">Войти</button></p>
     </form>
   </template>
 
-  <template id="success-template">
-    <div class="popup__message">
-      <h2 class="popup__title">Пользователь успешно зарегистрирован!</h2>
+  <template id="message-template">
+    <div class="popup__message" data-content-type="message">
+      <h2 class="popup__title font font_family_roboto">Пользователь успешно зарегистрирован</h2>
 
-      <button class="popup__choice popup__choice_display_block">Войти</button>
+      <p class="popup__text font font_family_inter"><button class="popup__choice popup__choice_display_inline">Войти</button></p>
     </div>
   </template>
 
@@ -245,7 +258,12 @@
   </footer>
 
   <template id="card">
-    <article class="card cards__card">
+    <a
+      class="font font_color_dark card cards__card"
+      href=""
+      rel="noopener noreferrer"
+      target="_blank"
+      >
       <div class="card__icon-container card__icon-container_unauth">
         <div class="card__icon card__icon_type_unmarked"></div>
       </div>
@@ -264,7 +282,7 @@
         <p class="card__description"></p>
         <address class="font font_family_roboto-slab card__address"></address>
       </div>
-    </article>
+    </a>
   </template>
 
   <script src="<%= htmlWebpackPlugin.files.js %>"></script>

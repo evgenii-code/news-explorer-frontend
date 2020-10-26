@@ -11,6 +11,8 @@
 .card {
   position: relative;
 
+  text-decoration: none;
+
   background-color: #fff;
   border-radius: 16px;
   overflow: hidden;

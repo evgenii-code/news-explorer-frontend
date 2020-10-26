@@ -123,7 +123,12 @@
   </footer>
 
   <template id="card">
-    <article class="card cards__card">
+    <a
+      class="font font_color_dark card cards__card"
+      href=""
+      rel="noopener noreferrer"
+      target="_blank"
+    >
       <div class="card__icon-container">
         <div class="card__icon"></div>
       </div>
@@ -141,7 +146,7 @@
         <p class="card__description"></p>
         <address class="font font_family_roboto-slab card__address"></address>
       </div>
-    </article>
+    </a>
   </template>
 
   <script src="<%= htmlWebpackPlugin.files.js %>"></script>
