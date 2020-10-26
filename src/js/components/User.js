@@ -23,4 +23,8 @@ export default class User {
   getName() {
     return this._userName;
   }
+
+  isLoggedIn() {
+    return this._isLoggedIn;
+  }
 }
