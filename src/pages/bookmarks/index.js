@@ -22,6 +22,7 @@ import {
   getToken,
   deleteToken,
 } from '../../js/utils/local-storage-utils';
+import redirectToRoot from '../../js/utils/redirect';
 import dateFormatter from '../../js/utils/date-formatter';
 import MainApi from '../../js/api/MainApi';
 import User from '../../js/components/User';
@@ -48,7 +49,7 @@ const header = new Header({
     localStorage.removeItem('jwt');
     user.loggedOut();
 
-    window.location.replace('/');
+    redirectToRoot();
   },
 });
 
@@ -118,5 +119,5 @@ mainApi.getAppInfo(getToken())
     console.log(`Ошибка при авторизации: ${error}`);
     deleteToken();
     user.loggedOut();
-    window.location.replace('/');
+    redirectToRoot();
   });
