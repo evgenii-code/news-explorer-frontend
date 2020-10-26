@@ -16,8 +16,7 @@ export default class Form {
 
     this._submitButton = this._element.querySelector(this._config.submitButton);
     this._serverError = this._element.querySelector(this._config.serverError);
-    this._submitHandler = submitHandler;
-    this._setListeners();
+    this._submitHandler = submitHandler.bind(this);
   }
 
   node() {
@@ -43,8 +42,14 @@ export default class Form {
       this._showInputError(input, this._errorMessages.tooShort);
       return;
     }
-    if (input.validity.typeMismatch) {
-      this._showInputError(input, this._errorMessages.typeMismatch);
+
+    if (input.name === 'email' && input.validity.patternMismatch) {
+      this._showInputError(input, this._errorMessages.emailMismatch);
+      return;
+    }
+
+    if (input.validity.patternMismatch) {
+      this._showInputError(input, this._errorMessages.patternMismatch);
       return;
     }
 
@@ -97,7 +102,7 @@ export default class Form {
     this.clear();
   }
 
-  _setListeners() {
+  setListeners() {
     this._inputs.forEach((input) => {
       input.addEventListener('input', () => this._validateInputElement(input));
     });
