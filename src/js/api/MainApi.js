@@ -4,8 +4,8 @@ export default class MainApi {
   constructor({
     options,
   }) {
-    this.baseUrl = options.baseUrl;
-    this.paths = options.paths;
+    this._baseUrl = options.baseUrl;
+    this._paths = options.paths;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -15,6 +15,9 @@ export default class MainApi {
         if (res.ok) {
           return res.json();
         }
+
+        // TODO - рефактор
+        if (res.status >= 400 && res.status < 500) return Promise.reject(res.json());
 
         return Promise.reject(new Error(`Ошибка: ${res.status}`));
       });
@@ -26,7 +29,7 @@ export default class MainApi {
 
   signup(user) {
     // регистрирует нового пользователя;
-    const url = this.baseUrl + this.paths.signup;
+    const url = this._baseUrl + this._paths.signup;
 
     const options = {
       method: 'POST',
@@ -36,22 +39,12 @@ export default class MainApi {
       body: JSON.stringify(user),
     };
 
-    return fetch(url, options)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // TODO - рефактор
-        if (res.status >= 400 && res.status < 500) return Promise.reject(res.json());
-
-        return Promise.reject(new Error(`Ошибка: ${res.status}`));
-      });
+    return this._fetchData({ url, options });
   }
 
   signin(user) {
     // аутентифицирует пользователя на основе почты и пароля;
-    const url = this.baseUrl + this.paths.signin;
+    const url = this._baseUrl + this._paths.signin;
     const options = {
       method: 'POST',
       headers: {
@@ -60,22 +53,12 @@ export default class MainApi {
       body: JSON.stringify(user),
     };
 
-    return fetch(url, options)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // TODO - рефактор
-        if (res.status >= 400 && res.status < 500) return Promise.reject(res.json());
-
-        return Promise.reject(new Error(`Ошибка: ${res.status}`));
-      });
+    return this._fetchData({ url, options });
   }
 
   getUserData(token) {
     // возвращает информацию о пользователе;
-    const url = this.baseUrl + this.paths.userData;
+    const url = this._baseUrl + this._paths.userData;
     const options = {
       headers: {
         authorization: `Bearer ${token}`,
@@ -88,7 +71,7 @@ export default class MainApi {
   getArticles(token) {
     // забирает все статьи;
 
-    const url = this.baseUrl + this.paths.articles;
+    const url = this._baseUrl + this._paths.articles;
     const options = {
       headers: {
         authorization: `Bearer ${token}`,
@@ -100,7 +83,7 @@ export default class MainApi {
 
   createArticle({ article, token }) {
     // создаёт статью;
-    const url = this.baseUrl + this.paths.articles;
+    const url = this._baseUrl + this._paths.articles;
     const options = {
       method: 'POST',
       headers: {
@@ -115,7 +98,7 @@ export default class MainApi {
 
   removeArticle({ cardId, token }) {
     // удаляет статью.
-    const url = `${this.baseUrl + this.paths.articles}/${cardId}`;
+    const url = `${this._baseUrl + this._paths.articles}/${cardId}`;
     const options = {
       method: 'DELETE',
       headers: {
