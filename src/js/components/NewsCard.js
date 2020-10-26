@@ -26,6 +26,7 @@ export default class NewsCard {
   }
 
   create() {
+    this._element.href = this._content.link;
     this._title.textContent = this._content.title;
     this._source.textContent = this._content.source;
     this._date.textContent = this._dateFormatter(this._content.date);
@@ -50,6 +51,14 @@ export default class NewsCard {
     return this._cardId;
   }
 
+  setId(cardId) {
+    if (cardId === this._cardId) {
+      this._cardId = null;
+    } else {
+      this._cardId = cardId;
+    }
+  }
+
   delete() {
     this._removeListeners();
     this._element.remove();
@@ -64,19 +73,20 @@ export default class NewsCard {
     this._icon.removeEventListener('click', this._iconClickHandler);
   }
 
-  renderIcon({ isLoggedIn, marked, saved }) { // TODO - рефактор
+  renderIcon({ isLoggedIn, saved }) { // TODO - рефактор
     // отвечает за отрисовку иконки карточки.
     // У этой иконки три состояния:
     // - иконка незалогиненного пользователя,
     // - активная иконка залогиненного,
     // - неактивная иконка залогиненного
     if (saved) {
-      return this._icon.classList.add(this._config.iconDelete);
+      this._icon.classList.add(this._config.iconDelete);
+      return;
     }
 
     if (isLoggedIn) {
       this._iconContainer.classList.remove(this._config.iconContainerUnauth);
-      if (marked) {
+      if (this._cardId) {
         this._icon.classList.add(this._config.iconMarked);
         this._icon.classList.remove(this._config.iconUnmarked);
       } else {
