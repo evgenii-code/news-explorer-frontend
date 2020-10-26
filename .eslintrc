@@ -11,6 +11,12 @@
         "allow": ["_id"],
         "allowAfterThis": true
       }
-    ]
+    ],
+    // "no-use-before-define": [
+    //   "error",
+    //   {
+    //     "variables": false
+    //     }
+    // ]
   }
 }
