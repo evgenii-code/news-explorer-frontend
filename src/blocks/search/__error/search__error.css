@@ -1,0 +1,22 @@
+.search__error {
+  color: #fff;
+  margin: 0;
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 786px) {
+  .search__error {
+    bottom: -30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .search__error {
+    bottom: -24px;
+  }
+}

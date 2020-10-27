@@ -2,6 +2,8 @@
 @import url('./__description/info__description.css');
 @import url('./__name/info__name.css');
 @import url('./__title/info__title.css');
+@import url('./__keywords/info__keywords.css');
+@import url('./__keyword/info__keyword.css');
 
 .info {
 

@@ -1,3 +1,5 @@
+@import url('./_hidden/header__menu_hidden.css');
+
 .header__menu {
   font-weight: 500;
   font-style: normal;

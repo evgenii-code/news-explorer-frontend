@@ -1,4 +1,5 @@
 @import url('./_style/info__description_style_bold.css');
+@import url('./_hidden/info__description_hidden.css');
 
 .info__description {
   margin-top: 30px;

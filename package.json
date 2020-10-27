@@ -1,12 +1,12 @@
 {
   "name": "news-explorer-frontend",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Frontend for diploma",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && webpack --mode production && touch dist/.nojekyll",
-    "dev": "webpack-dev-server --mode development --open --watch",
-    "deploy": "gh-pages -d dist"
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --mode production && touch dist/.nojekyll",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --mode development --open --watch",
+    "deploy": "cross-env NODE_ENV=production gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "@bem/sdk.config": "0.1.0",
     "autoprefixer": "9.8.6",
     "babel-loader": "8.1.0",
+    "cross-env": "7.0.2",
     "bem-tools-core": "0.0.3",
     "bem-tools-create": "2.3.0",
     "css-loader": "4.3.0",

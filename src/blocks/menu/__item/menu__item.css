@@ -1,3 +1,5 @@
+@import url('./_hidden/menu__item_hidden.css');
+
 .menu__item {
   display: flex;
   margin-left: 32px;
