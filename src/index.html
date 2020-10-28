@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description"
         content="NewsExplorer позволяет искать новости по ключевым словам и сохранять их в личном кабинете. Фронтэнд по дипломной работе Яндекс.Практикум">
   <meta name="author"
@@ -204,8 +204,9 @@
         <div class="author__about">
           <h2 class="font font_family_roboto-slab title author__title">Об авторе</h2>
 
-          <p class="description author__description">Это блок с описанием автора проекта. Здесь следует указать, как вас зовут, чем вы занимаетесь, какими технологиями разработки владеете.</p>
-          <p class="description author__description">Также можно рассказать о процессе обучения в Практикуме, чему вы тут научились, и чем можете помочь потенциальным заказчикам.</p>
+          <p class="description author__description">Меня зовут Осипенков Евгений. Я начинающий веб-разработчик</p>
+          <p class="description author__description">Этот сайт &ndash; моя дипломная работа курсу «Веб-разработчик» в Яндекс.Практикум.</p>
+          <p class="description author__description">На данном курсе я научился верстать по методологии БЭМ, писать объектно-ориентированный код на JavaScript, собирать проекты Webpack-ом, а также создавать REST API.</p>
         </div>
       </div>
     </section>
@@ -245,12 +246,22 @@
         </li>
         <li class="footer__item footer__item_direction_row">
           <a
-            href="https://facebook.com"
+            href="https://t.me/evgenii_code"
             rel="noopener noreferrer"
             target="_blank"
             class="footer__link"
           >
-            <img src="<%=require('./assets/ui/logos/facebook.svg')%>" alt="Facebook лого" class="footer__logo">
+            <img src="<%=require('./assets/ui/logos/telegram.svg')%>" alt="Telegram лого" class="footer__logo">
+          </a>
+        </li>
+        <li class="footer__item footer__item_direction_row">
+          <a
+            href="mailto:osipenkov.evgenii@gmail.com"
+            rel="noopener noreferrer"
+            target="_blank"
+            class="footer__link"
+          >
+            <img src="<%=require('./assets/ui/logos/email.svg')%>" alt="Email лого" class="footer__logo">
           </a>
         </li>
       </ul>
